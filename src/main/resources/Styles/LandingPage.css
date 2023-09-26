@@ -1,0 +1,36 @@
+
+/* Main Menu Section */
+.main_menu_container {
+    -fx-background-color: #EEEEEE;
+    -fx-alignment: center;
+}
+
+.left_container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 4);
+}
+
+/* Navigation Section */
+.menu_container {
+    -fx-padding: 70 60 70 60;
+    -fx-spacing: 70;
+}
+
+.menu_container Button {
+    -fx-pref-width: 240;
+    -fx-pref-height: 40;
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5 ,0, 0, 6);
+}
+
+.menu_container Button:hover {
+    -fx-cursor: hand;
+}
+
+.menu_container Button FontAwesomeIconView {
+    -fx-fill: #132A13;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+      prefWidth="300.0" styleClass="main_menu_container" stylesheets="@../Styles/LandingPage.css"
+      xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.LandingPageController">
+   <AnchorPane prefHeight="700.0" prefWidth="200.0" styleClass="left_container">
+      <VBox prefHeight="600.0" prefWidth="300.0" styleClass="menu_container">
+         <Button fx:id="configuration_btn" mnemonicParsing="false" text="Configuration"/>
+         <Button fx:id="historic_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" text="Historic"/>
+         <Button fx:id="quit_btn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" text="Quit"/>
+      </VBox>
+   </AnchorPane>
+</VBox>

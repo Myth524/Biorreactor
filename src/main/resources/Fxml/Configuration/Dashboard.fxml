@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.DashboardController">
+   <Pane layoutX="29.0" layoutY="68.0" prefHeight="98.0" prefWidth="165.0" styleClass="alt_dashboard_pane_container">
+      <Label text="Time" />
+   </Pane>
+   <AnchorPane layoutX="160.0" layoutY="195.0" prefHeight="471.0" prefWidth="637.0" styleClass="dashboard_pane_container">
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="pH" />
+      </Pane>
+      <Pane layoutX="10.0" layoutY="340.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="O2/CO2" />
+      </Pane>
+      <Pane layoutX="452.0" layoutY="170.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="Temperature" />
+      </Pane>
+      <Pane layoutX="226.0" layoutY="170.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="Pressure" />
+      </Pane>
+      <Pane layoutX="226.0" layoutY="340.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="Liquid level" />
+      </Pane>
+      <Pane layoutX="226.0" layoutY="10.0" prefHeight="100.0" prefWidth="165.0">
+         <Label text="Crop volume" />
+      </Pane>
+      <Pane layoutX="10.0" layoutY="170.0" prefHeight="100.0" prefWidth="165.0">
+         <Label text="Stirring rate" />
+      </Pane>
+      <Pane layoutX="452.0" layoutY="10.0" prefHeight="98.0" prefWidth="165.0" styleClass="dashboard_panel_container">
+         <Label text="Nutrients" />
+      </Pane>
+      <Pane layoutX="452.0" layoutY="340.0" prefHeight="98.0" prefWidth="165.0">
+         <Label text="Foam" />
+      </Pane>
+   </AnchorPane>
+   <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
+   </VBox>
+   <VBox layoutX="26.0" layoutY="195.0" prefHeight="471.0" prefWidth="105.0" styleClass="dashboard_menu_container">
+      <Button fx:id="time_btn" mnemonicParsing="false" text="Tme" />
+      <Button fx:id="temp_btn" mnemonicParsing="false" text="Temperature" />
+      <Button fx:id="pressure_btn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Pressure" />
+      <Button fx:id="stirring_btn" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" text="Stirring rate" />
+      <Button fx:id="crop_btn" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" text="Crop volume" />
+      <Button fx:id="oxygen_btn" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" text="O2/CO2" />
+      <Button fx:id="foam_btn" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" text="Foam" />
+      <Button fx:id="ph_btn" layoutX="10.0" layoutY="135.0" mnemonicParsing="false" text="pH" />
+      <Button fx:id="nutrients_btn" layoutX="10.0" layoutY="160.0" mnemonicParsing="false" text="Nutrients" />
+      <Button fx:id="liquid_btn" layoutX="10.0" layoutY="185.0" mnemonicParsing="false" text="Liquid Level" />
+   </VBox>
+   <Text layoutX="356.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alt_title_container" text="Parameters">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Text>
+   <ToggleButton fx:id="start_tbtn" layoutX="649.0" layoutY="106.0" mnemonicParsing="false" text="Start">
+      <graphic>
+         <FontAwesomeIconView glyphName="PLAY" />
+      </graphic>
+   </ToggleButton>
+</AnchorPane>

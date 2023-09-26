@@ -1,0 +1,119 @@
+
+.dashboard_container {
+    -fx-background-color: #DDDDDD;
+    -fx-alignment: center;
+
+ }
+
+.dashboard_container ToggleButton {
+     -fx-background-color: #132A13;
+     -fx-text-fill: #FFFFFF;
+     -fx-pref-width: 70;
+     -fx-pref-height: 30;
+     -fx-alignment: center;
+     -fx-background-radius: 10;
+     -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 4);
+     -fx-alignment: center;
+ }
+
+ .dashboard_container ToggleButton FontAwesomeIconView {
+     -fx-fill: #FFFFFF;
+     -fx-alignment: center_left;
+ }
+
+.dashboard_container ToggleButton:hover {
+     -fx-cursor: hand;
+ }
+.alt_ToggleButton_container {
+     -fx-background-color: #FFFFFF;
+     -fx-text-fill: #132A13;
+     -fx-pref-width: 70;
+     -fx-pref-height: 30;
+     -fx-alignment: center;
+     -fx-background-radius: 10;
+     -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 4);
+     -fx-alignment: center;
+}
+
+.alt_ToggleButton_container FontAwesomeIconView {
+    -fx-fill: #132A13;
+    -fx-alignment: center_left;
+}
+
+.title_container {
+    -fx-background-color: #132A13;
+    -fx-border-radius: 10;
+    -fx-alignment: top_center;
+    -fx-padding: 10;
+ }
+
+.title_container Text {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+}
+
+.alt_title_container {
+    -fx-fill: #000000;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+    -fx-alignment: center_left;
+}
+
+/* dashboard menu*/
+.dashboard_menu_container {
+    -fx-alignment: center;
+    -fx-background-radius: 10;
+    -fx-background-color: #EEEEEE;
+    -fx-padding: 10;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 4);
+}
+
+.dashboard_menu_container Button:hover {
+    -fx-cursor: hand;
+}
+
+.dashboard_menu_container Button{
+    -fx-background-radius: 10;
+    -fx-pref-width: 115;
+    -fx-pref-height: 40;
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5 ,0, 0, 6);
+}
+
+.dashboard_alt_menu_btn {
+    -fx-pref-width: 115;
+    -fx-pref-height: 40;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #132A13;
+    -fx-font-size: 12;
+    -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5 ,0, 0, 6);
+}
+
+/* Dashboard panel labels */
+.dashboard_pane_container {
+    -fx-background-color: #DDDDDD;
+    -fx-padding: 10;
+}
+
+.dashboard_pane_container Pane {
+    -fx-background-radius: 10;
+    -fx-pref-width: 165;
+    -fx-pref-height: 111;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5 ,0, 0, 6);
+}
+
+.alt_dashboard_pane_container{
+    -fx-background-radius: 10;
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5 ,0, 0, 6);
+}
+

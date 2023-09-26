@@ -1,0 +1,25 @@
+.dashboard_container {
+    -fx-background-color: #DDDDDD;
+    -fx-alignment: center;
+ }
+
+.title_container {
+    -fx-background-color: #132A13;
+    -fx-border-radius: 10;
+    -fx-alignment: top_center;
+    -fx-padding: 10;
+ }
+
+.title_container Text {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+}
+
+.alt_title_container {
+    -fx-fill: #000000;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
+    -fx-alignment: center_left;
+}
+
