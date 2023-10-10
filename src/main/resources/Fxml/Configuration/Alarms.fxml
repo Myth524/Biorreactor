@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Dashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.AlarmsController">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.AlarmsController">
    <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
    </VBox>
@@ -15,5 +14,4 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Text>
-   <ListView layoutX="75.0" layoutY="160.0" prefHeight="500.0" prefWidth="700.0" />
 </AnchorPane>

@@ -6,31 +6,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-      prefWidth="160.0" styleClass="main_menu_container" stylesheets="@../../Styles/ConfigurationMenu.css"
-      xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.ConfigurationMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="160.0" styleClass="main_menu_container" stylesheets="@../../Styles/ConfigurationMenu.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.ConfigurationMenuController">
    <AnchorPane prefHeight="700.0" prefWidth="160.0" styleClass="left_container">
-      <VBox prefHeight="400.0" prefWidth="160.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0"
-            AnchorPane.rightAnchor="0.0">
-         <Button fx:id="parameters_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Parameters">
+      <VBox prefHeight="700.0" prefWidth="160.0" styleClass="menu_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <Button fx:id="synoptic_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Synoptic">
             <graphic>
-               <FontAwesomeIconView glyphName="GEAR" size="20"/>
+               <FontAwesomeIconView glyphName="FLASK" size="20" />
             </graphic>
          </Button>
-         <Button fx:id="alarms_btn" mnemonicParsing="false" text="Alarms/Events">
+         <Button fx:id="summary_btn" mnemonicParsing="false" text="Summary">
             <graphic>
-               <FontAwesomeIconView glyphName="BELL" size="20"/>
+               <FontAwesomeIconView glyphName="LIST" />
+            </graphic>
+         </Button>
+         <Button fx:id="gauge_btn" mnemonicParsing="false" text="Gauge">
+            <graphic>
+               <FontAwesomeIconView glyphName="GEAR" />
+            </graphic>
+         </Button>
+         <Button fx:id="pumps_btn" mnemonicParsing="false" text="Pumps">
+            <graphic>
+               <FontAwesomeIconView glyphName="SHOWER" />
+            </graphic>
+         </Button>
+         <Button fx:id="calibration_btn" mnemonicParsing="false" text="Calibration">
+            <graphic>
+               <FontAwesomeIconView glyphName="COMPASS" />
+            </graphic>
+         </Button>
+         <Button fx:id="alarms_btn" mnemonicParsing="false" text="Alarms">
+            <graphic>
+               <FontAwesomeIconView glyphName="BELL" size="20" />
             </graphic>
          </Button>
          <Button fx:id="graphs_btn" mnemonicParsing="false" text="Graphs">
             <graphic>
-               <FontAwesomeIconView glyphName="SIGNAL" size="20"/>
+               <FontAwesomeIconView glyphName="SIGNAL" size="20" />
             </graphic>
          </Button>
-         <Line endX="120.0"/>
+         <Line endX="120.0" />
          <Button fx:id="return_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Return">
             <graphic>
-               <FontAwesomeIconView glyphName="ARROW_LEFT" size="20"/>
+               <FontAwesomeIconView glyphName="ARROW_LEFT" size="20" />
             </graphic>
          </Button>
       </VBox>

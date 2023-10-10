@@ -11,9 +11,15 @@ import javafx.stage.Stage;
 public class ViewFactory {
 
     private final StringProperty configurationSelectedMenuItem;
-    private AnchorPane dashboardView;
+    private AnchorPane synopticView;
     private AnchorPane alarmsView;
     private AnchorPane graphsView;
+    private AnchorPane pumpsView;
+    private AnchorPane gaugeView;
+    private AnchorPane summaryView;
+    private AnchorPane calibrationView;
+
+
 
     public ViewFactory (){
         this.configurationSelectedMenuItem = new SimpleStringProperty("");
@@ -26,15 +32,15 @@ public class ViewFactory {
 
 
     /** Configuration view **/
-    public AnchorPane getDashboardView(){
-        if(dashboardView==null){
+    public AnchorPane getSynopticView(){
+        if(synopticView==null){
             try{
-                dashboardView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Dashboard.fxml")).load();
+                synopticView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Synoptic.fxml")).load();
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
-        return dashboardView;
+        return synopticView;
     }
 
     public AnchorPane getAlarmsView(){
@@ -58,6 +64,51 @@ public class ViewFactory {
         }
         return graphsView;
     }
+
+    public AnchorPane getPumpsView(){
+        if(pumpsView == null){
+            try{
+                pumpsView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Pumps.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return pumpsView;
+    }
+
+    public AnchorPane getGaugeView(){
+        if(gaugeView == null){
+            try{
+                gaugeView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Gauge.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return gaugeView;
+    }
+
+    public AnchorPane getSummaryView(){
+        if(summaryView == null){
+            try{
+                summaryView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Summary.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return summaryView;
+    }
+
+    public AnchorPane getCalibrationView(){
+        if(calibrationView == null){
+            try{
+                calibrationView = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Calibration.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return calibrationView;
+    }
+
     /** Main Views **/
     public void showLandingPageWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/LandingPage.fxml"));

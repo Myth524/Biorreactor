@@ -10,7 +10,7 @@
     </left>
 
     <center>
-        <fx:include source="Dashboard.fxml"/>
+        <fx:include source="Synoptic.fxml"/>
     </center>
 
 </BorderPane>

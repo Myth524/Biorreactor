@@ -24,6 +24,7 @@
 .dashboard_container ToggleButton:hover {
      -fx-cursor: hand;
  }
+
 .alt_ToggleButton_container {
      -fx-background-color: #FFFFFF;
      -fx-text-fill: #132A13;

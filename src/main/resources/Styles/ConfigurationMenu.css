@@ -1,4 +1,3 @@
-
 /* Main Menu Section */
 .main_menu_container {
     -fx-background-color: #EEEEEE;
@@ -17,34 +16,30 @@
     -fx-spacing: 20;
 }
 
-.menu_container Button {
+/* Botones en el menú principal */
+.menu_container Button, .alt_menu_btn {
     -fx-pref-width: 116;
     -fx-pref-height: 40;
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #132A13;
     -fx-font-size: 12;
-    -fx-alignment: center_left;
-    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5 ,0, 0, 6);
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5, 0, 0, 6);
 }
 
-.menu_container Button:hover {
+.menu_container Button:hover, .alt_menu_btn:hover {
     -fx-cursor: hand;
 }
 
-.menu_container Button FontAwesomeIconView {
+.menu_container Button FontAwesomeIconView, .alt_menu_btn FontAwesomeIconView {
     -fx-fill: #132A13;
 }
 
+/* Botones de estilo alternativo */
 .alt_menu_btn {
-   -fx-pref-width: 116;
-   -fx-pref-height: 40;
-   -fx-background-color: #132A13;
-   -fx-text-fill: #FFFFFF;
-   -fx-font-size: 12;
-   -fx-alignment: center_left;
-   -fx-effect: dropshadow(three-pass-box, #DDDDDD, 5 ,0, 0, 6);
+    -fx-background-color: #132A13;
+    -fx-text-fill: #FFFFFF;
 }
-
 .alt_menu_btn FontAwesomeIconView {
     -fx-fill: #FFFFFF;
 }

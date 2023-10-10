@@ -15,11 +15,13 @@ public class ConfigurationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ViewModel.getInstance().getViewFactory().getconfigurationSelectedMenuItem().addListener((observableValue, oldVal, newVal) -> {
             switch (newVal){
-
                 case "Alarms" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getAlarmsView());
                 case "Graphs" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getGraphsView());
-
-                default -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getDashboardView());
+                case "Calibration" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getCalibrationView());
+                case "Gauge" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getGaugeView());
+                case "Pumps" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getPumpsView());
+                case "Summary" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getSummaryView());
+                default -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getSynopticView());
             }
         } );
 
