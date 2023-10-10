@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,4 +16,13 @@
             <Font name="System Bold" size="12.0" />
         </font>
     </Text>
+    <TableView fx:id="alarms_table" layoutX="25.0" layoutY="150.0" prefHeight="525.0" prefWidth="800.0">
+        <columns>
+            <TableColumn fx:id="loopNameCol" prefWidth="160.0" text="Loop Name" />
+            <TableColumn fx:id="pvCol" prefWidth="160.0" text="Process Value" />
+            <TableColumn fx:id="stCol" minWidth="9.0" prefWidth="160.0" text="Set Point" />
+            <TableColumn fx:id="controlCol" prefWidth="160.0" text="Control Mode" />
+            <TableColumn fx:id="unitsCol" prefWidth="160.0" text="Units" />
+        </columns>
+    </TableView>
 </AnchorPane>

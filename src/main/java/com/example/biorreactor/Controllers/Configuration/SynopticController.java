@@ -129,11 +129,11 @@ public class SynopticController implements Initializable {
 
     private void addListeners() {
         start_tbtn.setOnAction(event -> onStart());
-        cropName.setOnAction(event -> fillCropName(cropName.getText()));
-        date.setOnAction(event -> fillDate());
+        //cropName.setOnAction(event -> fillCropName(cropName.getText()));
+        //date.setOnAction(event -> fillDate());
     }
 
-    private void fillCropName(String cropName) {
+    /*private void fillCropName(String cropName) {
         if (cropName != null && !cropName.isEmpty()) {
             this.cropName.setEditable(false);
             this.cropName.setDisable(true);
@@ -143,8 +143,8 @@ public class SynopticController implements Initializable {
     private void fillDate() {
         if (date !=null) {
             date.setDisable(true);
-        }
-    }
+
+    }*/
 
     private void onStart() {
         start_tbtn.setOnMouseClicked(event -> {
