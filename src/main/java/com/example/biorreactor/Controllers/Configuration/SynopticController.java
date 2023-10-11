@@ -1,6 +1,8 @@
 package com.example.biorreactor.Controllers.Configuration;
 
 import com.example.biorreactor.Models.DataModel;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +16,7 @@ import java.util.ResourceBundle;
 public class SynopticController implements Initializable {
 
     // Buttons
-    public ToggleButton start_tbtn;
+    public ToggleButton start_btn;
     public Button temp_btn;
     public Button stirring_btn;
     public Button ph_btn;
@@ -73,6 +75,7 @@ public class SynopticController implements Initializable {
     @FXML public DatePicker date;
 
     ObservableList<DataModel> list = FXCollections.observableArrayList(
+            new DataModel(),
             new DataModel()
     );
 
@@ -80,60 +83,175 @@ public class SynopticController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
 
-        // Ph
-        stPhCol.setCellValueFactory(new PropertyValueFactory<>("stPh"));
-        pvPhCol.setCellValueFactory(new PropertyValueFactory<>("pvPh"));
+        // pH
+        stPhCol.setCellValueFactory(cellData -> {
+            int columnIndex = phTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(0);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvPhCol.setCellValueFactory(cellData -> {
+            int columnIndex = phTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(0);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         phTable.setItems(list);
 
         // Temperature
-        stTempCol.setCellValueFactory(new PropertyValueFactory<>("stTemp"));
-        pvTempCol.setCellValueFactory(new PropertyValueFactory<>("pvTemp"));
+        stTempCol.setCellValueFactory(cellData -> {
+            int columnIndex = tempTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(1);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvTempCol.setCellValueFactory(cellData -> {
+            int columnIndex = tempTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(1);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         tempTable.setItems(list);
 
         // Stirring Rate
-        stStirringCol.setCellValueFactory(new PropertyValueFactory<>("stStirring"));
-        pvStirringCol.setCellValueFactory(new PropertyValueFactory<>("pvStirring"));
+        stStirringCol.setCellValueFactory(cellData -> {
+            int columnIndex = stirringTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(2);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvStirringCol.setCellValueFactory(cellData -> {
+            int columnIndex = stirringTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(2);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         stirringTable.setItems(list);
 
         // Air Flow
-        stAirCol.setCellValueFactory(new PropertyValueFactory<>("stAir"));
-        pvAirCol.setCellValueFactory(new PropertyValueFactory<>("pvAir"));
+        stAirCol.setCellValueFactory(cellData -> {
+            int columnIndex = airTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(3);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvAirCol.setCellValueFactory(cellData -> {
+            int columnIndex = airTable.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(3);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         airTable.setItems(list);
 
         // Oxygen Flow
-        stO2Col.setCellValueFactory(new PropertyValueFactory<>("stO2"));
-        pvO2Col.setCellValueFactory(new PropertyValueFactory<>("pvO2"));
+        stO2Col.setCellValueFactory(cellData -> {
+            int columnIndex = o2Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(4);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvO2Col.setCellValueFactory(cellData -> {
+            int columnIndex = o2Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(4);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         o2Table.setItems(list);
 
         // Pump 1
-        stPump1Col.setCellValueFactory(new PropertyValueFactory<>("stPump1"));
-        pvPump1Col.setCellValueFactory(new PropertyValueFactory<>("pvPump1"));
+        stPump1Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump1Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(5);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvPump1Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump1Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(5);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         pump1Table.setItems(list);
 
         // Pump 2
-        stPump2Col.setCellValueFactory(new PropertyValueFactory<>("stPump2"));
-        pvPump2Col.setCellValueFactory(new PropertyValueFactory<>("pvPump2"));
+        stPump2Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump2Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(6);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvPump2Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump2Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(6);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         pump2Table.setItems(list);
 
         // Pump 3
-        stPump3Col.setCellValueFactory(new PropertyValueFactory<>("stPump3"));
-        pvPump3Col.setCellValueFactory(new PropertyValueFactory<>("pvPump3"));
+        stPump3Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump3Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(7);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvPump3Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump3Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(7);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         pump3Table.setItems(list);
 
         // Pump 4
-        stPump4Col.setCellValueFactory(new PropertyValueFactory<>("stPump1"));
-        pvPump4Col.setCellValueFactory(new PropertyValueFactory<>("pvPump1"));
+        stPump4Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump4Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getStProperty(8);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
+
+        pvPump4Col.setCellValueFactory(cellData -> {
+            int columnIndex = pump4Table.getColumns().indexOf(cellData.getTableColumn());
+            if (columnIndex >= 0 && columnIndex < list.size()) {
+                return list.get(columnIndex).getPvProperty(8);
+            }
+            return new SimpleDoubleProperty(0).asObject();
+        });
         pump4Table.setItems(list);
-
     }
-
     private void addListeners() {
-        start_tbtn.setOnAction(event -> onStart());
-        //cropName.setOnAction(event -> fillCropName(cropName.getText()));
-        //date.setOnAction(event -> fillDate());
+        start_btn.setOnAction(event -> onStart());
+        cropName.setOnAction(event -> fillCropName(cropName.getText()));
+        date.setOnAction(event -> fillDate());
     }
 
-    /*private void fillCropName(String cropName) {
+    private void fillCropName(String cropName) {
         if (cropName != null && !cropName.isEmpty()) {
             this.cropName.setEditable(false);
             this.cropName.setDisable(true);
@@ -143,17 +261,17 @@ public class SynopticController implements Initializable {
     private void fillDate() {
         if (date !=null) {
             date.setDisable(true);
-
-    }*/
+        }
+    }
 
     private void onStart() {
-        start_tbtn.setOnMouseClicked(event -> {
-            if (start_tbtn.isSelected()) {
-                start_tbtn.setText("Stop");
-                setButtonStyle(start_tbtn, "alt_ToggleButton_container");
+        start_btn.setOnMouseClicked(event -> {
+            if (start_btn.isSelected()) {
+                start_btn.setText("Stop");
+                setButtonStyle(start_btn, "alt_ToggleButton_container");
             } else {
-                start_tbtn.setText("Start");
-                setButtonStyle(start_tbtn, "dashboard_container");
+                start_btn.setText("Start");
+                setButtonStyle(start_btn, "dashboard_container");
             }
         });
     }

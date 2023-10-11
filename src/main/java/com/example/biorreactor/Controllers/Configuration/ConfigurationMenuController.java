@@ -36,7 +36,7 @@ public class ConfigurationMenuController implements Initializable {
     }
 
     private void onSynoptic(){
-        handleButtonClick("Sypnotic", synoptic_btn);
+        handleButtonClick("Synoptic", synoptic_btn);
     }
 
     private void onSummary() {

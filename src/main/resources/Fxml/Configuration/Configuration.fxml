@@ -10,7 +10,7 @@
     </left>
 
     <center>
-        <fx:include source="Synoptic.fxml"/>
+        <fx:include source="LandingPage.fxml"/>
     </center>
 
 </BorderPane>

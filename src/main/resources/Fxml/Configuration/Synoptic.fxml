@@ -22,7 +22,7 @@
          <Font name="System Bold" size="12.0" />
       </font>
    </Text>
-   <ToggleButton fx:id="start_tbtn" layoutX="627.0" layoutY="98.0" mnemonicParsing="false" text="Start">
+   <ToggleButton fx:id="start_btn" layoutX="627.0" layoutY="98.0" mnemonicParsing="false" text="Start">
       <graphic>
          <FontAwesomeIconView glyphName="PLAY" />
       </graphic>

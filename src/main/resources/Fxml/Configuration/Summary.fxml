@@ -16,7 +16,7 @@
             <Font name="System Bold" size="12.0" />
         </font>
     </Text>
-    <TableView fx:id="alarms_table" layoutX="25.0" layoutY="150.0" prefHeight="525.0" prefWidth="800.0">
+    <TableView fx:id="summary_table" layoutX="25.0" layoutY="150.0" prefHeight="525.0" prefWidth="800.0">
         <columns>
             <TableColumn fx:id="loopNameCol" prefWidth="160.0" text="Loop Name" />
             <TableColumn fx:id="pvCol" prefWidth="160.0" text="Process Value" />

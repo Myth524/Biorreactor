@@ -18,7 +18,7 @@ public class ViewFactory {
     private AnchorPane gaugeView;
     private AnchorPane summaryView;
     private AnchorPane calibrationView;
-
+    private AnchorPane confLanding;
 
 
     public ViewFactory (){
@@ -32,6 +32,17 @@ public class ViewFactory {
 
 
     /** Configuration view **/
+    public AnchorPane getConfLandingView(){
+        if(confLanding==null){
+            try{
+                confLanding = new FXMLLoader(getClass().getResource("/Fxml/Configuration/LandingPage.fxml")).load();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return confLanding;
+    }
+
     public AnchorPane getSynopticView(){
         if(synopticView==null){
             try{

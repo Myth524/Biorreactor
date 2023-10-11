@@ -1,281 +1,123 @@
 package com.example.biorreactor.Models;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.*;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataModel {
 
     // Atributos
-    private final DoubleProperty stPh;
-    private final DoubleProperty pvPh;
-    private final DoubleProperty stTemp;
-    private final DoubleProperty pvTemp;
 
-    private final DoubleProperty stO2;
-    private final DoubleProperty pvO2;
+        // Crop name (String)
 
-    private final DoubleProperty stStirring;
-    private final DoubleProperty pvStirring;
+        // Date (DatePicker)
 
-    private final DoubleProperty stPump1;
-    private final DoubleProperty pvPump1;
+    // Control mode (ON OR OFF) (True or False)
+        private final ArrayList<Boolean> control = new ArrayList<>();
 
-    private final DoubleProperty stPump2;
-    private final DoubleProperty pvPump2;
+    // Alarms (ABS Low, ABS High, ABS Enable (ON or OFF) (True or False), DEV Low, DEV High, DEV Enable (ON or OFF) (True or False))
+        private final ArrayList<ArrayList<DoubleProperty>> alarms = new ArrayList<ArrayList<DoubleProperty>>(); /***/
 
-    private final DoubleProperty stPump3;
-    private final DoubleProperty pvPump3;
+    // Units
+        private final ArrayList<StringProperty> units = new ArrayList<>();
 
-    private final DoubleProperty stPump4;
-    private final DoubleProperty pvPump4;
+    // LoopName
+        private final ArrayList<StringProperty> loopNames = new ArrayList<>();
 
-    private final DoubleProperty stAir;
-    private final DoubleProperty pvAir;
+        // Setpoints and Proccess Values (pH, Temp, O2, Air, Stirrring, pump1, pump2, pump3, pum4)
+        private final ArrayList<DoubleProperty> pv = new ArrayList<>();
+        private final ArrayList<DoubleProperty> st = new ArrayList<>();
+
+    // Valves
+    /***/
 
     // Constructor
     public DataModel() {
-        this.stPh = new SimpleDoubleProperty(0);
-        this.pvPh = new SimpleDoubleProperty(0);
 
-        this.stTemp = new SimpleDoubleProperty(1);
-        this.pvTemp = new SimpleDoubleProperty(1);
+        // LoopNames
+        loopNames.add(new SimpleStringProperty("pH"));
+        loopNames.add(new SimpleStringProperty("Temperature"));
+        loopNames.add(new SimpleStringProperty("Oxygen flow"));
+        loopNames.add(new SimpleStringProperty("Air flow"));
+        loopNames.add(new SimpleStringProperty("Stirring Rate"));
+        loopNames.add(new SimpleStringProperty("Pump 1"));
+        loopNames.add(new SimpleStringProperty("Pump 2"));
+        loopNames.add(new SimpleStringProperty("Pump 3"));
+        loopNames.add(new SimpleStringProperty("Pump 4"));
 
-        this.stO2 = new SimpleDoubleProperty(2);
-        this.pvO2 = new SimpleDoubleProperty(2);
+        // SetPoints and Proccess Values
+        for (int i = -1; i < 17; i++) {
+            pv.add(new SimpleDoubleProperty(i+2));
+            st.add(new SimpleDoubleProperty(i));
+        }
 
-        this.stStirring = new SimpleDoubleProperty(3);
-        this.pvStirring = new SimpleDoubleProperty(3);
+        // Alarms
+        for (int i = 0; i < 9; i++) {
 
-        this.stPump1 = new SimpleDoubleProperty(4);
-        this.pvPump1 = new SimpleDoubleProperty(4);
+        }
 
-        this.stPump2 = new SimpleDoubleProperty(5);
-        this.pvPump2 = new SimpleDoubleProperty(5);
+        // Units
+        units.add(new SimpleStringProperty("pH"));
+        units.add(new SimpleStringProperty("DegC"));
+        units.add(new SimpleStringProperty("SLMP"));
+        units.add(new SimpleStringProperty("SLMP"));
+        units.add(new SimpleStringProperty("RPM"));
+        units.add(new SimpleStringProperty("%"));
 
-        this.stPump3 = new SimpleDoubleProperty(6);
-        this.pvPump3 = new SimpleDoubleProperty(6);
+        // Control Mode
+        for (int i=0; i < 9; i++) {
+            control.add(false);
+        }
 
-        this.stPump4 = new SimpleDoubleProperty(7);
-        this.pvPump4 = new SimpleDoubleProperty(7);
+        // Alarms
 
-        this.stAir = new SimpleDoubleProperty(8);
-        this.pvAir = new SimpleDoubleProperty(8);
+
+
+
     }
 
     // Getters and Setters
-    public double getStPh() {
-        return stPh.get();
+
+    public ObjectProperty<Double> getPvProperty(int i) {
+        return pv.get(i).asObject();
     }
 
-    public void setStPh(double stPh) {
-        this.stPh.set(stPh);
+    public ObjectProperty<Double> getStProperty(int i) {
+        return st.get(i).asObject();
     }
 
-    public DoubleProperty stPropertyPh() {
-        return stPh;
+    public ArrayList<StringProperty> getLoopNames() {
+        return loopNames;
+    }
+    public List<DoubleProperty> getSt() {
+        return st;
     }
 
-    public double getPvPh() {
-        return pvPh.get();
+    public List<DoubleProperty> getPv() {
+        return pv;
+    }
+    public ObjectProperty<Boolean> getControlProperty(int index) {
+        if (index >= 0 && index < control.size()) {
+            SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(control.get(index));
+            return booleanProperty.asObject();
+        }
+        return new SimpleBooleanProperty(false).asObject();
+    }
+    public ArrayList<StringProperty> getUnitsProperty() {
+        return units;
     }
 
-    public void setPvPh(double pvPh) {
-        this.pvPh.set(pvPh);
+    public ArrayList<Boolean> getControl() {
+        return control;
     }
 
-    public DoubleProperty pvPropertyPh() {
-        return pvPh;
-    }
-    public double getStTemp() {
-        return stTemp.get();
+    public ArrayList<ArrayList<DoubleProperty>> getAlarms() {
+        return alarms;
     }
 
-    public void setStTemp(double stTemp) {
-        this.stTemp.set(stTemp);
+    public ArrayList<StringProperty> getUnits() {
+        return units;
     }
-
-    public DoubleProperty stPropertyTemp() {
-        return stTemp;
-    }
-
-    public double getPvTemp() {
-        return pvTemp.get();
-    }
-
-    public void setPvTemp(double pvTemp) {
-        this.pvTemp.set(pvTemp);
-    }
-
-    public DoubleProperty pvPropertyTemp() {
-        return pvTemp;
-    }
-
-    public double getStO2() {
-        return stO2.get();
-    }
-
-    public void setStO2(double stO2) {
-        this.stO2.set(stO2);
-    }
-
-    public DoubleProperty stPropertyO2() {
-        return stO2;
-    }
-
-    public double getPvO2() {
-        return pvO2.get();
-    }
-
-    public void setPvO2(double pvO2) {
-        this.pvO2.set(pvO2);
-    }
-
-    public DoubleProperty pvPropertyO2() {
-        return pvO2;
-    }
-
-    public double getStStirring() {
-        return stStirring.get();
-    }
-
-    public void setStStirring(double stStirring) {
-        this.stStirring.set(stStirring);
-    }
-
-    public DoubleProperty stPropertyStirring() {
-        return stStirring;
-    }
-
-    public double getPvStirring() {
-        return pvStirring.get();
-    }
-
-    public void setPvStirring(double pvStirring) {
-        this.pvStirring.set(pvStirring);
-    }
-
-    public DoubleProperty pvPropertyStirring() {
-        return pvStirring;
-    }
-
-    public double getStPump1() {
-        return stPump1.get();
-    }
-
-    public void setStPump1(double stPump1) {
-        this.stPump1.set(stPump1);
-    }
-
-    public DoubleProperty stPropertyPump1() {
-        return stPump1;
-    }
-
-    public double getPvPump1() {
-        return pvPump1.get();
-    }
-
-    public void setPvPump1(double pvPump1) {
-        this.pvPump1.set(pvPump1);
-    }
-
-    public DoubleProperty pvPropertyPump1() {
-        return pvPump1;
-    }
-
-    public double getStPump2() {
-        return stPump2.get();
-    }
-
-    public void setStPump2(double stPump2) {
-        this.stPump2.set(stPump2);
-    }
-
-    public DoubleProperty stPropertyPump2() {
-        return stPump2;
-    }
-
-    public double getPvPump2() {
-        return pvPump2.get();
-    }
-
-    public void setPvPump2(double pvPump2) {
-        this.pvPump2.set(pvPump2);
-    }
-
-    public DoubleProperty pvPropertyPump2() {
-        return pvPump2;
-    }
-
-    public double getStPump3() {
-        return stPump3.get();
-    }
-
-    public void setStPump3(double stPump3) {
-        this.stPump3.set(stPump3);
-    }
-
-    public DoubleProperty stPropertyPump3() {
-        return stPump3;
-    }
-
-    public double getPvPump3() {
-        return pvPump3.get();
-    }
-
-    public void setPvPump3(double pvPump3) {
-        this.pvPump3.set(pvPump3);
-    }
-
-    public DoubleProperty pvPropertyPump3() {
-        return pvPump3;
-    }
-
-    public double getStPump4() {
-        return stPump4.get();
-    }
-
-    public void setStPump4(double stPump4) {
-        this.stPump4.set(stPump4);
-    }
-
-    public DoubleProperty stPropertyPump4() {
-        return stPump4;
-    }
-
-    public double getPvPump4() {
-        return pvPump4.get();
-    }
-
-    public void setPvPump4(double pvPump4) {
-        this.pvPump4.set(pvPump4);
-    }
-
-    public DoubleProperty pvPropertyPump4() {
-        return pvPump4;
-    }
-
-    public double getStAir() {
-        return stAir.get();
-    }
-
-    public void setStAir(double stAir) {
-        this.stAir.set(stAir);
-    }
-
-    public DoubleProperty stPropertyAir() {
-        return stAir;
-    }
-
-    public double getPvAir() {
-        return pvAir.get();
-    }
-
-    public void setPvAir(double pvAir) {
-        this.pvAir.set(pvAir);
-    }
-
-    public DoubleProperty pvPropertyAir() {
-        return pvAir;
-    }
-
 }

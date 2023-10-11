@@ -21,7 +21,8 @@ public class ConfigurationController implements Initializable {
                 case "Gauge" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getGaugeView());
                 case "Pumps" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getPumpsView());
                 case "Summary" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getSummaryView());
-                default -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getSynopticView());
+                case "Synoptic" -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getSynopticView());
+                default -> configuration_parent.setCenter(ViewModel.getInstance().getViewFactory().getConfLandingView());
             }
         } );
 
