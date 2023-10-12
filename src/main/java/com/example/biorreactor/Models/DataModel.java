@@ -3,7 +3,6 @@ package com.example.biorreactor.Models;
 import javafx.beans.property.*;
 import javafx.scene.control.DatePicker;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class DataModel {
         private final ArrayList<Boolean> control = new ArrayList<>();
 
     // Alarms (ABS Low, ABS High, ABS Enable (ON or OFF) (True or False), DEV Low, DEV High, DEV Enable (ON or OFF) (True or False))
-        private final ArrayList<ArrayList<DoubleProperty>> alarms = new ArrayList<>(); /***/
+        private final ArrayList<Alarms> alarms = new ArrayList<>(); /***/
 
     // Units
         private final ArrayList<StringProperty> units = new ArrayList<>();
@@ -48,13 +47,15 @@ public class DataModel {
     // Constructor
     public DataModel() {
 
+        System.out.println("Valor variables inicializadas: " + "\n");
+
         // Cropname
         this.cropName = (new SimpleStringProperty(""));
+        System.out.println("Crop name: " + cropName.get() + "\n");
 
         // Datepicker
         this.date = (new DatePicker());
-
-        System.out.println("Valor variables inicializadas: " + "\n");
+        System.out.println("Date: " + date.getValue() + "\n");
 
         // LoopNames
         loopNames.add(new SimpleStringProperty("pH"));
@@ -104,21 +105,20 @@ public class DataModel {
         System.out.println("\nValores Alarmas: ");
 
         for (int i = 0; i < loopNames.size(); i++) {
-            ArrayList<DoubleProperty> alarmList = new ArrayList<>();
-            for (int j = 0; j < 6; j++) {
-                DoubleProperty doubleProperty = new SimpleDoubleProperty(0);
-                alarmList.add(doubleProperty);
-            }
-            alarms.add(alarmList);
+            alarms.add(new Alarms(loopNames.get(i).get(), false, false, 0, 0, 0, 0));
         }
 
         /*** Esto no va ***/
-        for (int i = 0; i < alarms.size(); i++) {
-            ArrayList<DoubleProperty> alarmList = alarms.get(i);
-            System.out.print("Fila " + i + ": ");
-            for (DoubleProperty doubleProperty : alarmList) {
-                System.out.print(doubleProperty.get() + " ");
-            }
+        for (int i = 0; i < loopNames.size(); i++) {
+            System.out.println("Fila " + i + ": ");
+            Alarms alarm = alarms.get(i);
+            System.out.println("Loop Name: " + alarm.loopNameProperty().get());
+            System.out.println("ABS Low: " + alarm.absLowProperty().get());
+            System.out.println("ABS High: " + alarm.absHighProperty().get());
+            System.out.println("ABS Enable: " + alarm.absEnProperty().get());
+            System.out.println("DEV Low: " + alarm.devLowProperty().get());
+            System.out.println("DEV High: " + alarm.devHighProperty().get());
+            System.out.println("DEV Enable: " + alarm.devEnProperty().get());
             System.out.println();
         }
 
@@ -159,7 +159,7 @@ public class DataModel {
         return control;
     }
 
-    public ArrayList<ArrayList<DoubleProperty>> getAlarms() {
+    public ArrayList<Alarms> getAlarms() {
         return alarms;
     }
 

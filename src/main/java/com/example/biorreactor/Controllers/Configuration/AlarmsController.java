@@ -1,5 +1,6 @@
 package com.example.biorreactor.Controllers.Configuration;
 
+import com.example.biorreactor.Models.Alarms;
 import com.example.biorreactor.Models.AlarmsDataRow;
 import com.example.biorreactor.Models.DataModel;
 import javafx.beans.property.DoubleProperty;
@@ -13,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -34,19 +36,22 @@ public class AlarmsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (int i = 0; i < dataModel.getLoopNames().size(); i++) {
-            AlarmsDataRow row = new AlarmsDataRow(
-                    dataModel.getLoopNames().get(i).get(),
-                    dataModel.getAlarms().get(i).get(0).get(),
-                    dataModel.getAlarms().get(i).get(1).get(),
-                    dataModel.getAlarms().get(i).get(2).get(),
-                    dataModel.getAlarms().get(i).get(3).get(),
-                    dataModel.getAlarms().get(i).get(4).get(),
-                    dataModel.getAlarms().get(i).get(5).get()
-            );
-            list.add(row);
-        }
 
+       ArrayList <Alarms> alarms = dataModel.getAlarms();
+
+        for (Alarms alarm : alarms) {
+            AlarmsDataRow alarmDataRow = new AlarmsDataRow(
+                    alarm.loopNameProperty().get(),
+                    alarm.absLowProperty().get(),
+                    alarm.absHighProperty().get(),
+                    alarm.absEnProperty().get(),
+                    alarm.devLowProperty().get(),
+                    alarm.devHighProperty().get(),
+                    alarm.devEnProperty().get()
+            );
+
+            list.add(alarmDataRow);
+        }
         alarms_table.setItems(list);
 
     }

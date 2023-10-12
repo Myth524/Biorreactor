@@ -66,7 +66,7 @@ public class SynopticController implements Initializable {
     @FXML public DatePicker date;
 
     DataModel dataModel = DataModel.getInstance();
-    ObservableList<DataModel> list = FXCollections.observableArrayList(dataModel,dataModel);
+    ObservableList<DataModel> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
