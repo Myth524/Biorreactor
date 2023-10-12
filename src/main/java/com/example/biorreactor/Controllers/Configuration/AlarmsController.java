@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -49,6 +50,14 @@ public class AlarmsController implements Initializable {
                     alarm.devHighProperty().get(),
                     alarm.devEnProperty().get()
             );
+
+            loopNameCol.setCellValueFactory(new PropertyValueFactory<>("loopName"));
+            absLowCol.setCellValueFactory(new PropertyValueFactory<>("absLow"));
+            absHighCol.setCellValueFactory(new PropertyValueFactory<>("absHigh"));
+            absEnCol.setCellValueFactory(new PropertyValueFactory<>("absEn"));
+            devLowCol.setCellValueFactory(new PropertyValueFactory<>("devLow"));
+            devHighCol.setCellValueFactory(new PropertyValueFactory<>("devHigh"));
+            devEnCol.setCellValueFactory(new PropertyValueFactory<>("devEn"));
 
             list.add(alarmDataRow);
         }

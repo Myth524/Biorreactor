@@ -1,12 +1,13 @@
 package com.example.biorreactor.Controllers.Configuration;
 
 import com.example.biorreactor.Models.DataModel;
-import javafx.beans.property.SimpleDoubleProperty;
+import com.example.biorreactor.Models.SummaryDataRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,176 +28,106 @@ public class SynopticController implements Initializable {
     public Button pump3_btn;
 
     // pH Table
-    @FXML public TableView<DataModel> phTable;
-    @FXML public TableColumn<DataModel, Double> stPhCol;
-    @FXML public TableColumn<DataModel, Double> pvPhCol;
+    @FXML public TableView<SummaryDataRow> phTable;
+    @FXML public TableColumn<SummaryDataRow, Double> stPhCol;
+    @FXML public TableColumn<SummaryDataRow, Double> pvPhCol;
 
     // Temperature Table
-    @FXML public TableView<DataModel> tempTable;
-    @FXML public TableColumn<DataModel, Double> stTempCol;
-    @FXML public TableColumn<DataModel, Double> pvTempCol;
+    @FXML public TableView<SummaryDataRow> tempTable;
+    @FXML public TableColumn<SummaryDataRow, Double> stTempCol;
+    @FXML public TableColumn<SummaryDataRow, Double> pvTempCol;
 
     // DO Table
-    @FXML public TableView<DataModel> DOTable;
-    @FXML public TableColumn<DataModel, Double> stDOCol;
-    @FXML public TableColumn<DataModel, Double> pvDOCol;
+    @FXML public TableView<SummaryDataRow> DOTable;
+    @FXML public TableColumn<SummaryDataRow, Double> stDOCol;
+    @FXML public TableColumn<SummaryDataRow, Double> pvDOCol;
 
     // Stirring Rate Table
-    @FXML public TableView<DataModel> stirringTable;
-    @FXML public TableColumn<DataModel, Double> stStirringCol;
-    @FXML public TableColumn<DataModel, Double> pvStirringCol;
+    @FXML public TableView<SummaryDataRow> stirringTable;
+    @FXML public TableColumn<SummaryDataRow, Double> stStirringCol;
+    @FXML public TableColumn<SummaryDataRow, Double> pvStirringCol;
 
     // Pump 1 Table
-    @FXML public TableView<DataModel> pump1Table;
-    @FXML public TableColumn<DataModel, Double> stPump1Col;
-    @FXML public TableColumn<DataModel, Double> pvPump1Col;
+    @FXML public TableView<SummaryDataRow> pump1Table;
+    @FXML public TableColumn<SummaryDataRow, Double> stPump1Col;
+    @FXML public TableColumn<SummaryDataRow, Double> pvPump1Col;
 
     // Pump 2 Table
-    @FXML public TableView<DataModel> pump2Table;
-    @FXML public TableColumn<DataModel, Double> stPump2Col;
-    @FXML public TableColumn<DataModel, Double> pvPump2Col;
+    @FXML public TableView<SummaryDataRow> pump2Table;
+    @FXML public TableColumn<SummaryDataRow, Double> stPump2Col;
+    @FXML public TableColumn<SummaryDataRow, Double> pvPump2Col;
 
     // Pump 3 Table
-    @FXML public TableView<DataModel> pump3Table;
-    @FXML public TableColumn<DataModel, Double> stPump3Col;
-    @FXML public TableColumn<DataModel, Double> pvPump3Col;
+    @FXML public TableView<SummaryDataRow> pump3Table;
+    @FXML public TableColumn<SummaryDataRow, Double> stPump3Col;
+    @FXML public TableColumn<SummaryDataRow, Double> pvPump3Col;
 
 
     @FXML public TextField cropName;
     @FXML public DatePicker date;
 
     DataModel dataModel = DataModel.getInstance();
-    ObservableList<DataModel> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
 
-        // pH
-        stPhCol.setCellValueFactory(cellData -> {
-            int columnIndex = phTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(0);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
+        // Asignar valores a la tabla de pH
+        SummaryDataRow pHRow = new SummaryDataRow();
+        pHRow.setPv(dataModel.getPv().get(0).get());
+        pvPhCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        pHRow.setSt(dataModel.getSt().get(0).get());
+        stPhCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        phTable.getItems().add(pHRow);
 
-        pvPhCol.setCellValueFactory(cellData -> {
-            int columnIndex = phTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(0);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        phTable.setItems(list);
+        // Asignar valores a la tabla de Temperature
+        SummaryDataRow tempRow = new SummaryDataRow();
+        tempRow.setPv(dataModel.getPv().get(1).get());
+        pvTempCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        tempRow.setSt(dataModel.getSt().get(1).get());
+        stTempCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        tempTable.getItems().add(tempRow);
 
-        // Temperature
-        stTempCol.setCellValueFactory(cellData -> {
-            int columnIndex = tempTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(1);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
+        // Asignar valores a la tabla de DO
+        SummaryDataRow DORow = new SummaryDataRow();
+        DORow.setPv(dataModel.getPv().get(2).get());
+        pvDOCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        DORow.setSt(dataModel.getSt().get(2).get());
+        stDOCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        DOTable.getItems().add(DORow);
 
-        pvTempCol.setCellValueFactory(cellData -> {
-            int columnIndex = tempTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(1);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        tempTable.setItems(list);
+        // Asignar valores a la tabla de Stirring Rate
+        SummaryDataRow stirringRow = new SummaryDataRow();
+        stirringRow.setPv(dataModel.getPv().get(3).get());
+        pvStirringCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        stirringRow.setSt(dataModel.getSt().get(3).get());
+        stStirringCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        stirringTable.getItems().add(stirringRow);
 
-        // Stirring Rate
-        stStirringCol.setCellValueFactory(cellData -> {
-            int columnIndex = stirringTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(2);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
+        // Asignar valores a la tabla de Pump 1
+        SummaryDataRow pump1Row = new SummaryDataRow();
+        pump1Row.setPv(dataModel.getPv().get(4).get());
+        pvPump1Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        pump1Row.setSt(dataModel.getSt().get(4).get());
+        stPump1Col.setCellValueFactory(new PropertyValueFactory<>("st"));
+        pump1Table.getItems().add(pump1Row);
 
-        pvStirringCol.setCellValueFactory(cellData -> {
-            int columnIndex = stirringTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(2);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        stirringTable.setItems(list);
+        // Asignar valores a la tabla de Pump 2
+        SummaryDataRow pump2Row = new SummaryDataRow();
+        pump2Row.setPv(dataModel.getPv().get(5).get());
+        pvPump2Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        pump2Row.setSt(dataModel.getSt().get(5).get());
+        stPump2Col.setCellValueFactory(new PropertyValueFactory<>("st"));
+        pump2Table.getItems().add(pump2Row);
 
-        // DO
-        stDOCol.setCellValueFactory(cellData -> {
-            int columnIndex = DOTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(4);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
+        // Asignar valores a la tabla de Pump 3
+        SummaryDataRow pump3Row = new SummaryDataRow();
+        pump3Row.setPv(dataModel.getPv().get(6).get());
+        pvPump3Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        pump3Row.setSt(dataModel.getSt().get(6).get());
+        stPump3Col.setCellValueFactory(new PropertyValueFactory<>("st"));
+        pump3Table.getItems().add(pump3Row);
 
-        pvDOCol.setCellValueFactory(cellData -> {
-            int columnIndex = DOTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(4);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        DOTable.setItems(list);
-
-        // Pump 1
-        stPump1Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump1Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(5);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        pvPump1Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump1Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(5);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        pump1Table.setItems(list);
-
-        // Pump 2
-        stPump2Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump2Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(6);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        pvPump2Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump2Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(6);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        pump2Table.setItems(list);
-
-        // Pump 3
-        stPump3Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump3Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(7);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        pvPump3Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump3Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(7);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        pump3Table.setItems(list);
     }
 
     private void addListeners() {

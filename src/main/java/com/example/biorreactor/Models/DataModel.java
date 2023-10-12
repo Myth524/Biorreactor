@@ -184,4 +184,11 @@ public class DataModel {
         return date;
     }
 
+    public ArrayList<DoubleProperty> getPv() {
+        return pv;
+    }
+
+    public ArrayList<DoubleProperty> getSt() {
+        return st;
+    }
 }
