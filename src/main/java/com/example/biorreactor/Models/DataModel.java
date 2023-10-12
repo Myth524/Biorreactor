@@ -1,5 +1,6 @@
 package com.example.biorreactor.Models;
 
+import com.example.biorreactor.Views.ViewFactory;
 import javafx.beans.property.*;
 import javafx.util.Pair;
 
@@ -7,6 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataModel {
+
+    private List<SummaryDataRow> rows = new ArrayList<>();
+    private static DataModel dataModel;
+
+    public static synchronized DataModel getInstance() {
+        if (dataModel == null) {
+            dataModel = new DataModel();
+        }
+        return dataModel;
+    }
 
     // Atributos
 
@@ -18,7 +29,7 @@ public class DataModel {
         private final ArrayList<Boolean> control = new ArrayList<>();
 
     // Alarms (ABS Low, ABS High, ABS Enable (ON or OFF) (True or False), DEV Low, DEV High, DEV Enable (ON or OFF) (True or False))
-        private final ArrayList<ArrayList<DoubleProperty>> alarms = new ArrayList<ArrayList<DoubleProperty>>(); /***/
+        private final ArrayList<ArrayList<DoubleProperty>> alarms = new ArrayList<>(); /***/
 
     // Units
         private final ArrayList<StringProperty> units = new ArrayList<>();
@@ -36,6 +47,8 @@ public class DataModel {
     // Constructor
     public DataModel() {
 
+        System.out.println("Valor variables inicializadas: ");
+
         // LoopNames
         loopNames.add(new SimpleStringProperty("pH"));
         loopNames.add(new SimpleStringProperty("Temperature"));
@@ -47,15 +60,15 @@ public class DataModel {
         loopNames.add(new SimpleStringProperty("Pump 3"));
         loopNames.add(new SimpleStringProperty("Pump 4"));
 
+        System.out.println("Loop names:");
+        for (StringProperty stringProperty : loopNames) {
+            System.out.println(stringProperty);
+        }
+
         // SetPoints and Proccess Values
         for (int i = -1; i < 17; i++) {
             pv.add(new SimpleDoubleProperty(i+2));
             st.add(new SimpleDoubleProperty(i));
-        }
-
-        // Alarms
-        for (int i = 0; i < 9; i++) {
-
         }
 
         // Units
@@ -73,8 +86,27 @@ public class DataModel {
 
         // Alarms
 
+        System.out.println("\nValores Alarmas: ");
 
+        for (int i = 0; i < 9; i++) {
+            ArrayList<DoubleProperty> alarmList = new ArrayList<>();
+            for (int j = 0; j < 6; j++) {
+                DoubleProperty doubleProperty = new SimpleDoubleProperty(0);
+                alarmList.add(doubleProperty);
+            }
+            alarms.add(alarmList);
+        }
 
+        /*** Esto no va ***/
+        for (int i = 0; i < alarms.size(); i++) {
+            ArrayList<DoubleProperty> alarmList = alarms.get(i);
+            System.out.print("Fila " + i + ": ");
+            for (int j = 0; j < alarmList.size(); j++) {
+                DoubleProperty doubleProperty = alarmList.get(j);
+                System.out.print(doubleProperty.get() + " ");
+            }
+            System.out.println();
+        }
 
     }
 
@@ -120,4 +152,16 @@ public class DataModel {
     public ArrayList<StringProperty> getUnits() {
         return units;
     }
+
+    public void addDataRow(SummaryDataRow row) {
+        rows.add(row);
+    }
+
+    public SummaryDataRow getDataRow(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < rows.size()) {
+            return rows.get(rowIndex);
+        }
+        return null;
+    }
+
 }

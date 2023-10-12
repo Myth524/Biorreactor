@@ -1,6 +1,7 @@
 package com.example.biorreactor.Controllers.Configuration;
 
 import com.example.biorreactor.Models.DataModel;
+import com.example.biorreactor.Models.SummaryDataRow;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -19,74 +20,39 @@ import java.util.ResourceBundle;
 public class SummaryController implements Initializable {
 
     @FXML
-    public TableView<DataModel> summary_table;
+    public TableView<SummaryDataRow> summary_table;
     @FXML
-    public TableColumn<DataModel, String> loopNameCol;
+    public TableColumn<SummaryDataRow, String> loopNameCol;
     @FXML
-    public TableColumn<DataModel, Double> pvCol;
+    public TableColumn<SummaryDataRow, Double> pvCol;
     @FXML
-    public TableColumn<DataModel, Double> stCol;
+    public TableColumn<SummaryDataRow, Double> stCol;
     @FXML
-    public TableColumn<DataModel, Boolean> controlCol;
+    public TableColumn<SummaryDataRow, Boolean> controlCol;
     @FXML
-    public TableColumn<DataModel, String> unitsCol;
+    public TableColumn<SummaryDataRow, String> unitsCol;
 
-    ObservableList<DataModel> list = FXCollections.observableArrayList();
+    DataModel dataModel = DataModel.getInstance();
+
+    ObservableList<SummaryDataRow> list = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        // Loopnames
-        loopNameCol.setCellValueFactory(cellData -> {
-            int rowIndex = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            if (rowIndex >= 0 && rowIndex < cellData.getValue().getLoopNames().size()) {
-                return cellData.getValue().getLoopNames().get(rowIndex);
-            }
-            return new SimpleStringProperty("");
-        });
-
-        // SetPoints
-        stCol.setCellValueFactory(cellData -> {
-            int rowIndex = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            if (rowIndex >= 0 && rowIndex < cellData.getValue().getSt().size()) {
-                return cellData.getValue().getStProperty(rowIndex);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        // PV
-        pvCol.setCellValueFactory(cellData -> {
-            int rowIndex = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            if (rowIndex >= 0 && rowIndex < cellData.getValue().getPv().size()) {
-                return cellData.getValue().getPvProperty(rowIndex);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        // Control Mode
-        controlCol.setCellValueFactory(cellData -> {
-            int rowIndex = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            if (rowIndex >= 0 && rowIndex < cellData.getValue().getControl().size()) {
-                return cellData.getValue().getControlProperty(rowIndex);
-            }
-            return new SimpleBooleanProperty(false).asObject();
-        });
-
-        // Units
-        unitsCol.setCellValueFactory(cellData -> {
-            int rowIndex = cellData.getTableView().getItems().indexOf(cellData.getValue());
-            if (rowIndex >= 0 && rowIndex < cellData.getValue().getUnits().size()) {
-                return cellData.getValue().getUnitsProperty().get(rowIndex);
-            }
-            return new SimpleStringProperty("");
-        });
-
-        // Agregar filas a la tabla
         for (int i = 0; i < 6; i++) {
-            list.add(new DataModel());
+            SummaryDataRow row = new SummaryDataRow();
+            row.setLoopName(dataModel.getLoopNames().get(i).get());
+            row.setPv(dataModel.getPvProperty(i).get());
+            row.setSt(dataModel.getStProperty(i).get());
+            row.setControl(dataModel.getControlProperty(i).get());
+            row.setUnits(dataModel.getUnitsProperty().get(i).get());
+            list.add(row);
         }
+
+        loopNameCol.setCellValueFactory(new PropertyValueFactory<>("loopName"));
+        pvCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        stCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        controlCol.setCellValueFactory(new PropertyValueFactory<>("control"));
+        unitsCol.setCellValueFactory(new PropertyValueFactory<>("units"));
 
         summary_table.setItems(list);
     }
-
-
 }
