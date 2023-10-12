@@ -1,15 +1,17 @@
 package com.example.biorreactor.Models;
 
-import com.example.biorreactor.Views.ViewFactory;
 import javafx.beans.property.*;
-import javafx.util.Pair;
+import javafx.scene.control.DatePicker;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataModel {
 
-    private List<SummaryDataRow> rows = new ArrayList<>();
+    private final List<SummaryDataRow> Srows = new ArrayList<>();
+    private final List<AlarmsDataRow> Arows = new ArrayList<>();
+
     private static DataModel dataModel;
 
     public static synchronized DataModel getInstance() {
@@ -22,8 +24,10 @@ public class DataModel {
     // Atributos
 
         // Crop name (String)
+        private final StringProperty cropName;
 
         // Date (DatePicker)
+        private final DatePicker date;
 
     // Control mode (ON OR OFF) (True or False)
         private final ArrayList<Boolean> control = new ArrayList<>();
@@ -37,58 +41,69 @@ public class DataModel {
     // LoopName
         private final ArrayList<StringProperty> loopNames = new ArrayList<>();
 
-        // Setpoints and Proccess Values (pH, Temp, O2, Air, Stirrring, pump1, pump2, pump3, pum4)
+        // Setpoints and Proccess Values (pH, Temp, DO, Stirrring, pump1, pump2, pump3)
         private final ArrayList<DoubleProperty> pv = new ArrayList<>();
         private final ArrayList<DoubleProperty> st = new ArrayList<>();
-
-    // Valves
-    /***/
 
     // Constructor
     public DataModel() {
 
-        System.out.println("Valor variables inicializadas: ");
+        // Cropname
+        this.cropName = (new SimpleStringProperty(""));
+
+        // Datepicker
+        this.date = (new DatePicker());
+
+        System.out.println("Valor variables inicializadas: " + "\n");
 
         // LoopNames
         loopNames.add(new SimpleStringProperty("pH"));
         loopNames.add(new SimpleStringProperty("Temperature"));
-        loopNames.add(new SimpleStringProperty("Oxygen flow"));
-        loopNames.add(new SimpleStringProperty("Air flow"));
+        loopNames.add(new SimpleStringProperty("DO"));
         loopNames.add(new SimpleStringProperty("Stirring Rate"));
-        loopNames.add(new SimpleStringProperty("Pump 1"));
-        loopNames.add(new SimpleStringProperty("Pump 2"));
-        loopNames.add(new SimpleStringProperty("Pump 3"));
-        loopNames.add(new SimpleStringProperty("Pump 4"));
+        loopNames.add(new SimpleStringProperty("Pump 1 (Acid)"));
+        loopNames.add(new SimpleStringProperty("Pump 2 (Base)"));
+        loopNames.add(new SimpleStringProperty("Pump 3 (HiFoam)"));
 
         System.out.println("Loop names:");
         for (StringProperty stringProperty : loopNames) {
-            System.out.println(stringProperty);
+            System.out.println(stringProperty.get());
         }
 
         // SetPoints and Proccess Values
-        for (int i = -1; i < 17; i++) {
-            pv.add(new SimpleDoubleProperty(i+2));
-            st.add(new SimpleDoubleProperty(i));
+         /*** se deben inicializan en 0 ***/
+
+        for (int i = 0; i < loopNames.size(); i++) {
+            pv.add(new SimpleDoubleProperty(i+1));
+            st.add(new SimpleDoubleProperty(i+1));
+        }
+        /*** Esto no va ***/
+        System.out.println("\nSetPoints and PV: ");
+        for(int i=0; i<loopNames.size();i++){
+            System.out.println(loopNames.get(i).get() + ": " + "PV: " + pv.get(i).get() + "\tST: " + st.get(i).get() + "\n");
         }
 
         // Units
         units.add(new SimpleStringProperty("pH"));
         units.add(new SimpleStringProperty("DegC"));
-        units.add(new SimpleStringProperty("SLMP"));
-        units.add(new SimpleStringProperty("SLMP"));
+        units.add(new SimpleStringProperty("%DO"));
         units.add(new SimpleStringProperty("RPM"));
+        units.add(new SimpleStringProperty("%"));
+        units.add(new SimpleStringProperty("%"));
         units.add(new SimpleStringProperty("%"));
 
         // Control Mode
-        for (int i=0; i < 9; i++) {
+        /*** Se debe inicializar en false ***/
+        for (int i=0; i < loopNames.size(); i++) {
             control.add(false);
         }
 
         // Alarms
+        /*** Se inicializa un arraylist vacio ***/
 
         System.out.println("\nValores Alarmas: ");
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < loopNames.size(); i++) {
             ArrayList<DoubleProperty> alarmList = new ArrayList<>();
             for (int j = 0; j < 6; j++) {
                 DoubleProperty doubleProperty = new SimpleDoubleProperty(0);
@@ -101,8 +116,7 @@ public class DataModel {
         for (int i = 0; i < alarms.size(); i++) {
             ArrayList<DoubleProperty> alarmList = alarms.get(i);
             System.out.print("Fila " + i + ": ");
-            for (int j = 0; j < alarmList.size(); j++) {
-                DoubleProperty doubleProperty = alarmList.get(j);
+            for (DoubleProperty doubleProperty : alarmList) {
                 System.out.print(doubleProperty.get() + " ");
             }
             System.out.println();
@@ -113,23 +127,23 @@ public class DataModel {
     // Getters and Setters
 
     public ObjectProperty<Double> getPvProperty(int i) {
-        return pv.get(i).asObject();
+        if (i >= 0 && i < pv.size()) {
+            return pv.get(i).asObject();
+        }
+        return new SimpleDoubleProperty(0).asObject();
     }
 
     public ObjectProperty<Double> getStProperty(int i) {
-        return st.get(i).asObject();
+        if (i >= 0 && i < st.size()) {
+            return st.get(i).asObject();
+        }
+        return new SimpleDoubleProperty(0).asObject();
     }
 
     public ArrayList<StringProperty> getLoopNames() {
         return loopNames;
     }
-    public List<DoubleProperty> getSt() {
-        return st;
-    }
 
-    public List<DoubleProperty> getPv() {
-        return pv;
-    }
     public ObjectProperty<Boolean> getControlProperty(int index) {
         if (index >= 0 && index < control.size()) {
             SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(control.get(index));
@@ -149,19 +163,25 @@ public class DataModel {
         return alarms;
     }
 
+
     public ArrayList<StringProperty> getUnits() {
         return units;
     }
 
-    public void addDataRow(SummaryDataRow row) {
-        rows.add(row);
+    public String getCropName() {
+        return cropName.get();
     }
 
-    public SummaryDataRow getDataRow(int rowIndex) {
-        if (rowIndex >= 0 && rowIndex < rows.size()) {
-            return rows.get(rowIndex);
-        }
-        return null;
+    public StringProperty cropNameProperty() {
+        return cropName;
+    }
+
+    public void setCropName(String cropName) {
+        this.cropName.set(cropName);
+    }
+
+    public DatePicker getDate() {
+        return date;
     }
 
 }

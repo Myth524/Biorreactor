@@ -2,13 +2,14 @@ package com.example.biorreactor.Controllers.Configuration;
 
 import com.example.biorreactor.Models.DataModel;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,12 +21,10 @@ public class SynopticController implements Initializable {
     public Button temp_btn;
     public Button stirring_btn;
     public Button ph_btn;
-    public Button o2_btn;
+    public Button DO_btn;
     public Button pump1_btn;
     public Button pump2_btn;
-    public Button pump4_btn;
     public Button pump3_btn;
-    public Button air_btn;
 
     // pH Table
     @FXML public TableView<DataModel> phTable;
@@ -37,20 +36,15 @@ public class SynopticController implements Initializable {
     @FXML public TableColumn<DataModel, Double> stTempCol;
     @FXML public TableColumn<DataModel, Double> pvTempCol;
 
-    // Oxygen Flow Table
-    @FXML public TableView<DataModel> o2Table;
-    @FXML public TableColumn<DataModel, Double> stO2Col;
-    @FXML public TableColumn<DataModel, Double> pvO2Col;
+    // DO Table
+    @FXML public TableView<DataModel> DOTable;
+    @FXML public TableColumn<DataModel, Double> stDOCol;
+    @FXML public TableColumn<DataModel, Double> pvDOCol;
 
     // Stirring Rate Table
     @FXML public TableView<DataModel> stirringTable;
     @FXML public TableColumn<DataModel, Double> stStirringCol;
     @FXML public TableColumn<DataModel, Double> pvStirringCol;
-
-    // Pump 4 Table
-    @FXML public TableView<DataModel> pump4Table;
-    @FXML public TableColumn<DataModel, Double> stPump4Col;
-    @FXML public TableColumn<DataModel, Double> pvPump4Col;
 
     // Pump 1 Table
     @FXML public TableView<DataModel> pump1Table;
@@ -67,10 +61,7 @@ public class SynopticController implements Initializable {
     @FXML public TableColumn<DataModel, Double> stPump3Col;
     @FXML public TableColumn<DataModel, Double> pvPump3Col;
 
-    // Air Table
-    @FXML public TableView<DataModel> airTable;
-    @FXML public TableColumn<DataModel, Double> stAirCol;
-    @FXML public TableColumn<DataModel, Double> pvAirCol;
+
     @FXML public TextField cropName;
     @FXML public DatePicker date;
 
@@ -135,41 +126,23 @@ public class SynopticController implements Initializable {
         });
         stirringTable.setItems(list);
 
-        // Air Flow
-        stAirCol.setCellValueFactory(cellData -> {
-            int columnIndex = airTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(3);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        pvAirCol.setCellValueFactory(cellData -> {
-            int columnIndex = airTable.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(3);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        airTable.setItems(list);
-
-        // Oxygen Flow
-        stO2Col.setCellValueFactory(cellData -> {
-            int columnIndex = o2Table.getColumns().indexOf(cellData.getTableColumn());
+        // DO
+        stDOCol.setCellValueFactory(cellData -> {
+            int columnIndex = DOTable.getColumns().indexOf(cellData.getTableColumn());
             if (columnIndex >= 0 && columnIndex < list.size()) {
                 return list.get(columnIndex).getStProperty(4);
             }
             return new SimpleDoubleProperty(0).asObject();
         });
 
-        pvO2Col.setCellValueFactory(cellData -> {
-            int columnIndex = o2Table.getColumns().indexOf(cellData.getTableColumn());
+        pvDOCol.setCellValueFactory(cellData -> {
+            int columnIndex = DOTable.getColumns().indexOf(cellData.getTableColumn());
             if (columnIndex >= 0 && columnIndex < list.size()) {
                 return list.get(columnIndex).getPvProperty(4);
             }
             return new SimpleDoubleProperty(0).asObject();
         });
-        o2Table.setItems(list);
+        DOTable.setItems(list);
 
         // Pump 1
         stPump1Col.setCellValueFactory(cellData -> {
@@ -224,25 +197,8 @@ public class SynopticController implements Initializable {
             return new SimpleDoubleProperty(0).asObject();
         });
         pump3Table.setItems(list);
-
-        // Pump 4
-        stPump4Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump4Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getStProperty(8);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-
-        pvPump4Col.setCellValueFactory(cellData -> {
-            int columnIndex = pump4Table.getColumns().indexOf(cellData.getTableColumn());
-            if (columnIndex >= 0 && columnIndex < list.size()) {
-                return list.get(columnIndex).getPvProperty(8);
-            }
-            return new SimpleDoubleProperty(0).asObject();
-        });
-        pump4Table.setItems(list);
     }
+
     private void addListeners() {
         start_btn.setOnAction(event -> onStart());
         cropName.setOnAction(event -> fillCropName(cropName.getText()));
@@ -251,14 +207,18 @@ public class SynopticController implements Initializable {
 
     private void fillCropName(String cropName) {
         if (cropName != null && !cropName.isEmpty()) {
-            this.cropName.setEditable(false);
+            dataModel.setCropName(cropName);
             this.cropName.setDisable(true);
-            this.cropName.setStyle("-fx-text-fill: gray;");
+            System.out.println("\nCrop name: " + dataModel.getCropName());
         }
     }
     private void fillDate() {
-        if (date !=null) {
+        if (date != null && date.getValue() != null) {
             date.setDisable(true);
+            LocalDate selectedDate = date.getValue();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+            String formattedDate = selectedDate.format(formatter);
+            System.out.println("\nDate: " + formattedDate);
         }
     }
 

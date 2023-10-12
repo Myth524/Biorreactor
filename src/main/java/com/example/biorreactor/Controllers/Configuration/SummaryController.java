@@ -37,7 +37,7 @@ public class SummaryController implements Initializable {
     ObservableList<SummaryDataRow> list = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < dataModel.getUnits().size(); i++) {
             SummaryDataRow row = new SummaryDataRow();
             row.setLoopName(dataModel.getLoopNames().get(i).get());
             row.setPv(dataModel.getPvProperty(i).get());

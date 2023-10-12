@@ -40,13 +40,13 @@
             <TableColumn fx:id="pvTempCol" prefWidth="50.0" text="PV" />
          </columns>
       </TableView>
-      <TableView fx:id="o2Table" layoutX="224.0" layoutY="60.0" prefHeight="80.0" prefWidth="100.0">
+      <TableView fx:id="DOTable" layoutX="224.0" layoutY="60.0" prefHeight="80.0" prefWidth="100.0">
          <columns>
-            <TableColumn fx:id="stO2Col" prefWidth="50.0" text="ST" />
-            <TableColumn fx:id="pvO2Col" prefWidth="50.0" text="PV" />
+            <TableColumn fx:id="stDOCol" prefWidth="50.0" text="ST" />
+            <TableColumn fx:id="pvDOCol" prefWidth="50.0" text="PV" />
          </columns>
       </TableView>
-      <TableView fx:id="stirringTable" layoutX="40.0" layoutY="337.0" prefHeight="80.0" prefWidth="100.0">
+      <TableView fx:id="stirringTable" layoutX="224.0" layoutY="200.0" prefHeight="80.0" prefWidth="100.0">
          <columns>
             <TableColumn fx:id="stStirringCol" prefWidth="50.0" text="ST" />
             <TableColumn fx:id="pvStirringCol" prefWidth="50.0" text="PV" />
@@ -54,43 +54,29 @@
       </TableView>
       <Button fx:id="ph_btn" layoutX="40.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="pH" />
       <Button fx:id="temp_btn" layoutX="40.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Temperature" />
-      <Button fx:id="stirring_btn" layoutX="40.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Stirring Rate" />
-      <Button fx:id="o2_btn" layoutX="224.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="O2 Flow" />
-      <TableView fx:id="pump4Table" layoutX="645.0" layoutY="402.0" prefHeight="80.0" prefWidth="100.0">
-         <columns>
-            <TableColumn fx:id="stPump4Col" prefWidth="50.0" text="ST" />
-            <TableColumn fx:id="pvPump4Col" prefWidth="50.0" text="PV" />
-         </columns>
-      </TableView>
-      <Button fx:id="pump4_btn" layoutX="645.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 4" />
-      <TableView fx:id="pump1Table" layoutX="645.0" layoutY="43.0" prefHeight="80.0" prefWidth="100.0">
+      <Button fx:id="stirring_btn" layoutX="224.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Stirring Rate" />
+      <Button fx:id="DO_btn" layoutX="224.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="DO" />
+      <TableView fx:id="pump1Table" layoutX="645.0" layoutY="60.0" prefHeight="80.0" prefWidth="100.0">
          <columns>
             <TableColumn fx:id="stPump1Col" prefWidth="50.0" text="ST" />
             <TableColumn fx:id="pvPump1Col" prefWidth="50.0" text="PV" />
          </columns>
       </TableView>
-      <Button fx:id="pump1_btn" layoutX="645.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 1" />
-      <TableView fx:id="pump2Table" layoutX="645.0" layoutY="165.0" prefHeight="80.0" prefWidth="100.0">
+      <Button fx:id="pump1_btn" layoutX="645.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 1" />
+      <TableView fx:id="pump2Table" layoutX="645.0" layoutY="182.0" prefHeight="80.0" prefWidth="100.0">
          <columns>
             <TableColumn fx:id="stPump2Col" prefWidth="50.0" text="ST" />
             <TableColumn fx:id="pvPump2Col" prefWidth="50.0" text="PV" />
          </columns>
       </TableView>
-      <Button fx:id="pump2_btn" layoutX="645.0" layoutY="140.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 2" />
-      <TableView fx:id="pump3Table" layoutX="645.0" layoutY="285.0" prefHeight="80.0" prefWidth="100.0">
+      <Button fx:id="pump2_btn" layoutX="645.0" layoutY="157.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 2" />
+      <TableView fx:id="pump3Table" layoutX="645.0" layoutY="306.0" prefHeight="80.0" prefWidth="100.0">
          <columns>
             <TableColumn fx:id="stPump3Col" prefWidth="50.0" text="ST" />
             <TableColumn fx:id="pvPump3Col" prefWidth="50.0" text="PV" />
          </columns>
       </TableView>
-      <Button fx:id="pump3_btn" layoutX="645.0" layoutY="260.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 3" />
-      <TableView fx:id="airTable" layoutX="224.0" layoutY="200.0" prefHeight="80.0" prefWidth="100.0">
-         <columns>
-            <TableColumn fx:id="stAirCol" prefWidth="50.0" text="ST" />
-            <TableColumn fx:id="pvAirCol" prefWidth="50.0" text="PV" />
-         </columns>
-      </TableView>
-      <Button fx:id="air_btn" layoutX="224.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Air Flow" />
+      <Button fx:id="pump3_btn" layoutX="645.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Pump 3" />
    </AnchorPane>
    <DatePicker fx:id="date" layoutX="111.0" layoutY="121.0" />
    <TextField fx:id="cropName" layoutX="111.0" layoutY="79.0" prefHeight="25.0" prefWidth="174.0" />
