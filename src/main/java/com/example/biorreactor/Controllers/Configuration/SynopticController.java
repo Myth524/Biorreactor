@@ -1,9 +1,10 @@
 package com.example.biorreactor.Controllers.Configuration;
 
-import com.example.biorreactor.Models.DataModel;
-import com.example.biorreactor.Models.SummaryDataRow;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.biorreactor.Models.AddRow;
+import com.example.biorreactor.Models.Biorreactor;
+import com.example.biorreactor.Models.Loop;
+import com.example.biorreactor.Models.Pump;
+import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,107 +29,170 @@ public class SynopticController implements Initializable {
     public Button pump3_btn;
 
     // pH Table
-    @FXML public TableView<SummaryDataRow> phTable;
-    @FXML public TableColumn<SummaryDataRow, Double> stPhCol;
-    @FXML public TableColumn<SummaryDataRow, Double> pvPhCol;
+    @FXML public TableView<AddRow> phTable;
+    @FXML public TableColumn<AddRow, Double> stPhCol;
+    @FXML public TableColumn<AddRow, Double> pvPhCol;
 
     // Temperature Table
-    @FXML public TableView<SummaryDataRow> tempTable;
-    @FXML public TableColumn<SummaryDataRow, Double> stTempCol;
-    @FXML public TableColumn<SummaryDataRow, Double> pvTempCol;
+    @FXML public TableView<AddRow> tempTable;
+    @FXML public TableColumn<AddRow, Double> stTempCol;
+    @FXML public TableColumn<AddRow, Double> pvTempCol;
 
     // DO Table
-    @FXML public TableView<SummaryDataRow> DOTable;
-    @FXML public TableColumn<SummaryDataRow, Double> stDOCol;
-    @FXML public TableColumn<SummaryDataRow, Double> pvDOCol;
+    @FXML public TableView<AddRow> DOTable;
+    @FXML public TableColumn<AddRow, Double> stDOCol;
+    @FXML public TableColumn<AddRow, Double> pvDOCol;
 
     // Stirring Rate Table
-    @FXML public TableView<SummaryDataRow> stirringTable;
-    @FXML public TableColumn<SummaryDataRow, Double> stStirringCol;
-    @FXML public TableColumn<SummaryDataRow, Double> pvStirringCol;
+    @FXML public TableView<AddRow> stirringTable;
+    @FXML public TableColumn<AddRow, Double> stStirringCol;
+    @FXML public TableColumn<AddRow, Double> pvStirringCol;
 
     // Pump 1 Table
-    @FXML public TableView<SummaryDataRow> pump1Table;
-    @FXML public TableColumn<SummaryDataRow, Double> stPump1Col;
-    @FXML public TableColumn<SummaryDataRow, Double> pvPump1Col;
+    @FXML public TableView<AddRow> pump1Table;
+    @FXML public TableColumn<AddRow, Double> stPump1Col;
+    @FXML public TableColumn<AddRow, Double> pvPump1Col;
 
     // Pump 2 Table
-    @FXML public TableView<SummaryDataRow> pump2Table;
-    @FXML public TableColumn<SummaryDataRow, Double> stPump2Col;
-    @FXML public TableColumn<SummaryDataRow, Double> pvPump2Col;
+    @FXML public TableView<AddRow> pump2Table;
+    @FXML public TableColumn<AddRow, Double> stPump2Col;
+    @FXML public TableColumn<AddRow, Double> pvPump2Col;
 
     // Pump 3 Table
-    @FXML public TableView<SummaryDataRow> pump3Table;
-    @FXML public TableColumn<SummaryDataRow, Double> stPump3Col;
-    @FXML public TableColumn<SummaryDataRow, Double> pvPump3Col;
-
+    @FXML public TableView<AddRow> pump3Table;
+    @FXML public TableColumn<AddRow, Double> stPump3Col;
+    @FXML public TableColumn<AddRow, Double> pvPump3Col;
 
     @FXML public TextField cropName;
     @FXML public DatePicker date;
 
-    DataModel dataModel = DataModel.getInstance();
+    Biorreactor biorreactor = Biorreactor.getInstance();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
 
-        // Asignar valores a la tabla de pH
-        SummaryDataRow pHRow = new SummaryDataRow();
-        pHRow.setPv(dataModel.getPv().get(0).get());
+        // Tabla ph
+        AddRow phRow = new AddRow();
+        Loop phLoop = biorreactor.getLoops().get(0);
+        phRow.setPv(phLoop.getPv());
         pvPhCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        pHRow.setSt(dataModel.getSt().get(0).get());
+        phRow.setSt(phLoop.getSt());
         stPhCol.setCellValueFactory(new PropertyValueFactory<>("st"));
-        phTable.getItems().add(pHRow);
+        phTable.getItems().add(phRow);
 
-        // Asignar valores a la tabla de Temperature
-        SummaryDataRow tempRow = new SummaryDataRow();
-        tempRow.setPv(dataModel.getPv().get(1).get());
+        phLoop.pvProperty().addListener((observable, oldValue, newValue) ->
+        {
+            phRow.setPv(newValue.doubleValue());
+        });
+
+        phLoop.stProperty().addListener((observable, oldValue, newValue) -> {
+            phRow.setSt(newValue.doubleValue());
+        });
+
+        // Tabla temperature
+        AddRow tempRow = new AddRow();
+        Loop tempLoop = biorreactor.getLoops().get(1);
+        tempRow.setPv(tempLoop.getPv());
         pvTempCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        tempRow.setSt(dataModel.getSt().get(1).get());
+        tempRow.setSt(tempLoop.getSt());
         stTempCol.setCellValueFactory(new PropertyValueFactory<>("st"));
         tempTable.getItems().add(tempRow);
 
-        // Asignar valores a la tabla de DO
-        SummaryDataRow DORow = new SummaryDataRow();
-        DORow.setPv(dataModel.getPv().get(2).get());
-        pvDOCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        DORow.setSt(dataModel.getSt().get(2).get());
-        stDOCol.setCellValueFactory(new PropertyValueFactory<>("st"));
-        DOTable.getItems().add(DORow);
+        tempLoop.pvProperty().addListener((observable, oldValue, newValue) -> {
+            tempRow.setPv(newValue.doubleValue());
+        });
 
-        // Asignar valores a la tabla de Stirring Rate
-        SummaryDataRow stirringRow = new SummaryDataRow();
-        stirringRow.setPv(dataModel.getPv().get(3).get());
+        tempLoop.stProperty().addListener((observable, oldValue, newValue) -> {
+            tempRow.setSt(newValue.doubleValue());
+        });
+
+        // Tabla DO
+        AddRow doRow = new AddRow();
+        Loop doLoop = biorreactor.getLoops().get(2);
+        doRow.setPv(doLoop.getPv());
+        pvDOCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
+        doRow.setSt(doLoop.getSt());
+        stDOCol.setCellValueFactory(new PropertyValueFactory<>("st"));
+        DOTable.getItems().add(doRow);
+
+        doLoop.pvProperty().addListener((observable, oldValue, newValue) -> {
+            doRow.setPv(newValue.doubleValue());
+        });
+
+        doLoop.stProperty().addListener((observable, oldValue, newValue) -> {
+            doRow.setSt(newValue.doubleValue());
+        });
+
+        // Tabla Stirring Rate
+        AddRow stirringRow = new AddRow();
+        Loop stirringLoop = biorreactor.getLoops().get(3);
+        stirringRow.setPv(stirringLoop.getPv());
         pvStirringCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        stirringRow.setSt(dataModel.getSt().get(3).get());
+        stirringRow.setSt(stirringLoop.getSt());
         stStirringCol.setCellValueFactory(new PropertyValueFactory<>("st"));
         stirringTable.getItems().add(stirringRow);
 
-        // Asignar valores a la tabla de Pump 1
-        SummaryDataRow pump1Row = new SummaryDataRow();
-        pump1Row.setPv(dataModel.getPv().get(4).get());
+        stirringLoop.pvProperty().addListener((observable, oldValue, newValue) -> {
+            stirringRow.setPv(newValue.doubleValue());
+        });
+
+        stirringLoop.stProperty().addListener((observable, oldValue, newValue) -> {
+            stirringRow.setSt(newValue.doubleValue());
+        });
+
+        // Tabla Pump 1
+        AddRow pump1Row = new AddRow();
+        Pump pump1 = biorreactor.getPumps().get(0);
+        pump1Row.setPv(pump1.getPv());
         pvPump1Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        pump1Row.setSt(dataModel.getSt().get(4).get());
+        pump1Row.setSt(pump1.getSt());
         stPump1Col.setCellValueFactory(new PropertyValueFactory<>("st"));
         pump1Table.getItems().add(pump1Row);
 
-        // Asignar valores a la tabla de Pump 2
-        SummaryDataRow pump2Row = new SummaryDataRow();
-        pump2Row.setPv(dataModel.getPv().get(5).get());
+        pump1.pvProperty().addListener((observable, oldValue, newValue) -> {
+            pump1Row.setPv(newValue.doubleValue());
+        });
+
+        pump1.stProperty().addListener((observable, oldValue, newValue) -> {
+            pump1Row.setSt(newValue.doubleValue());
+        });
+
+        // Tabla Pump 2
+        AddRow pump2Row = new AddRow();
+        Pump pump2 = biorreactor.getPumps().get(1);
+        pump2Row.setPv(pump2.getPv());
         pvPump2Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        pump2Row.setSt(dataModel.getSt().get(5).get());
+        pump2Row.setSt(pump2.getSt());
         stPump2Col.setCellValueFactory(new PropertyValueFactory<>("st"));
         pump2Table.getItems().add(pump2Row);
 
-        // Asignar valores a la tabla de Pump 3
-        SummaryDataRow pump3Row = new SummaryDataRow();
-        pump3Row.setPv(dataModel.getPv().get(6).get());
+        pump2.pvProperty().addListener((observable, oldValue, newValue) -> {
+            pump2Row.setPv(newValue.doubleValue());
+        });
+
+        pump2.stProperty().addListener((observable, oldValue, newValue) -> {
+            pump2Row.setSt(newValue.doubleValue());
+        });
+
+        // Tabla Pump 3
+        AddRow pump3Row = new AddRow();
+        Pump pump3 = biorreactor.getPumps().get(2);
+        pump3Row.setPv(pump3.getPv());
         pvPump3Col.setCellValueFactory(new PropertyValueFactory<>("pv"));
-        pump3Row.setSt(dataModel.getSt().get(6).get());
+        pump3Row.setSt(pump3.getSt());
         stPump3Col.setCellValueFactory(new PropertyValueFactory<>("st"));
         pump3Table.getItems().add(pump3Row);
 
+        pump3.pvProperty().addListener((observable, oldValue, newValue) -> {
+            pump3Row.setPv(newValue.doubleValue());
+        });
+
+        pump3.stProperty().addListener((observable, oldValue, newValue) -> {
+            pump3Row.setSt(newValue.doubleValue());
+        });
     }
+
 
     private void addListeners() {
         start_btn.setOnAction(event -> onStart());
@@ -138,9 +202,9 @@ public class SynopticController implements Initializable {
 
     private void fillCropName(String cropName) {
         if (cropName != null && !cropName.isEmpty()) {
-            dataModel.setCropName(cropName);
+            biorreactor.setCropName(cropName);
             this.cropName.setDisable(true);
-            System.out.println("\nCrop name: " + dataModel.getCropName());
+            System.out.println("\nCrop name: " + biorreactor.getCropName());
         }
     }
     private void fillDate() {
@@ -163,6 +227,25 @@ public class SynopticController implements Initializable {
                 setButtonStyle(start_btn, "dashboard_container");
             }
         });
+
+        biorreactor.getPumps().get(0).setSt(biorreactor.getPumps().get(0).getSt()+1);
+        biorreactor.getPumps().get(0).setPv(biorreactor.getPumps().get(0).getPv()+2);
+        biorreactor.getPumps().get(0).setControlMode(!biorreactor.getPumps().get(0).isControlMode());
+        int currentPeriod = biorreactor.getPumps().get(0).getPeriod().get();
+        biorreactor.getPumps().get(0).setPeriod(currentPeriod + 1);
+
+        biorreactor.getPumps().get(1).setSt(biorreactor.getPumps().get(1).getSt()+1);
+        biorreactor.getPumps().get(1).setPv(biorreactor.getPumps().get(1).getPv()+2);
+        biorreactor.getPumps().get(1).setControlMode(!biorreactor.getPumps().get(1).isControlMode());
+        currentPeriod = biorreactor.getPumps().get(1).getPeriod().get();
+        biorreactor.getPumps().get(1).setPeriod(currentPeriod + 1);
+
+        biorreactor.getPumps().get(2).setSt(biorreactor.getPumps().get(2).getSt()+1);
+        biorreactor.getPumps().get(2).setPv(biorreactor.getPumps().get(2).getPv()+2);
+        biorreactor.getPumps().get(2).setControlMode(!biorreactor.getPumps().get(2).isControlMode());
+        currentPeriod = biorreactor.getPumps().get(2).getPeriod().get();
+        biorreactor.getPumps().get(2).setPeriod(currentPeriod + 1);
+
     }
 
     private void setButtonStyle(ToggleButton button, String styleClass) {

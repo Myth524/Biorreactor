@@ -1,11 +1,9 @@
 package com.example.biorreactor.Controllers.Configuration;
 
-import com.example.biorreactor.Models.DataModel;
-import com.example.biorreactor.Models.SummaryDataRow;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
+import com.example.biorreactor.Models.AddRow;
+import com.example.biorreactor.Models.Biorreactor;
+import com.example.biorreactor.Models.Loop;
+import com.example.biorreactor.Models.Pump;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,37 +18,77 @@ import java.util.ResourceBundle;
 public class SummaryController implements Initializable {
 
     @FXML
-    public TableView<SummaryDataRow> summary_table;
+    public TableView<AddRow> summary_table;
     @FXML
-    public TableColumn<SummaryDataRow, String> loopNameCol;
+    public TableColumn<AddRow, String> loopNameCol;
     @FXML
-    public TableColumn<SummaryDataRow, Double> pvCol;
+    public TableColumn<AddRow, Double> pvCol;
     @FXML
-    public TableColumn<SummaryDataRow, Double> stCol;
+    public TableColumn<AddRow, Double> stCol;
     @FXML
-    public TableColumn<SummaryDataRow, Boolean> controlCol;
+    public TableColumn<AddRow, Boolean> controlCol;
     @FXML
-    public TableColumn<SummaryDataRow, String> unitsCol;
+    public TableColumn<AddRow, String> unitsCol;
 
-    DataModel dataModel = DataModel.getInstance();
+    Biorreactor biorreactor = Biorreactor.getInstance();
+    ObservableList<AddRow> list = FXCollections.observableArrayList();
 
-    ObservableList<SummaryDataRow> list = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (int i = 0; i < dataModel.getUnits().size(); i++) {
-            SummaryDataRow row = new SummaryDataRow();
-            row.setLoopName(dataModel.getLoopNames().get(i).get());
-            row.setPv(dataModel.getPvProperty(i).get());
-            row.setSt(dataModel.getStProperty(i).get());
-            row.setControl(dataModel.getControlProperty(i).get());
-            row.setUnits(dataModel.getUnitsProperty().get(i).get());
+        // Loops
+        for (int i = 0; i < biorreactor.getLoops().size(); i++) {
+            AddRow row = new AddRow();
+            Loop loop = biorreactor.getLoops().get(i);
+            row.setLoopName(loop.getName());
+            row.setPv(loop.pvProperty().get());
+            row.setSt(loop.stProperty().get());
+            row.setControlMode(loop.isControlMode());
+            row.setUnits(loop.getUnits());
+
             list.add(row);
+
+            loop.pvProperty().addListener((observable, oldValue, newValue) -> {
+                row.setPv((Double) newValue);
+            });
+
+            loop.stProperty().addListener((observable, oldValue, newValue) -> {
+                row.setSt((Double) newValue);
+            });
+
+            loop.controlModeProperty().addListener((observable, oldValue, newValue) -> {
+                row.setControlMode(newValue);
+            });
+        }
+
+        // Pumps
+        for (int i = 0; i < biorreactor.getPumps().size(); i++) {
+            AddRow row = new AddRow();
+            Pump pump = biorreactor.getPumps().get(i);
+            row.setLoopName(pump.getName() + " (" + pump.getMode() + ")");
+            row.setPv(pump.pvProperty().get());
+            row.setSt(pump.stProperty().get());
+            row.setControlMode(pump.isControlMode());
+            row.setUnits(pump.getUnits());
+
+            list.add(row);
+
+            pump.pvProperty().addListener((observable, oldValue, newValue) -> {
+                row.setPv((Double) newValue);
+            });
+
+            pump.stProperty().addListener((observable, oldValue, newValue) -> {
+                row.setSt((Double) newValue);
+            });
+
+            pump.controlModeProperty().addListener((observable, oldValue, newValue) -> {
+               row.setControlMode(newValue);
+            });
         }
 
         loopNameCol.setCellValueFactory(new PropertyValueFactory<>("loopName"));
         pvCol.setCellValueFactory(new PropertyValueFactory<>("pv"));
         stCol.setCellValueFactory(new PropertyValueFactory<>("st"));
-        controlCol.setCellValueFactory(new PropertyValueFactory<>("control"));
+        controlCol.setCellValueFactory(new PropertyValueFactory<>("controlMode"));
         unitsCol.setCellValueFactory(new PropertyValueFactory<>("units"));
 
         summary_table.setItems(list);
