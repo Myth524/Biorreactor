@@ -1,68 +1,50 @@
-/* Contenedor principal */
-.alarm_settings_container {
+
+.dashboard_container {
     -fx-background-color: #DDDDDD;
     -fx-alignment: center;
+
 }
 
-/* Contenedor de la izquierda con detalles de alarma */
-.alarm_details_container {
-    -fx-background-color: #FFFFFF;
-}
-
-.alarm_details_pane {
-    -fx-background-color: #D8D8D8;
-    -fx-border-color: #000000;
+.title_container {
+    -fx-background-color: #132A13;
+    -fx-border-radius: 10;
+    -fx-alignment: top_center;
     -fx-padding: 10;
-    -fx-background-radius: 10;
 }
 
-.alarm_details_pane Label {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
-    -fx-border-color: #000000;
-    -fx-pref-width: 50;
-    -fx-pref-height: 30;
-    -fx-alignment: center;
-    -fx-padding: 5;
+.title_container Text {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
 }
 
-.alarm_details_pane TextField {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 10;
-    -fx-border-color: #000000;
-    -fx-pref-width: 50;
-    -fx-pref-height: 30;
-    -fx-alignment: center;
-    -fx-padding: 5;
-}
-
-.alarm_details_pane Text {
+.alt_title_container {
     -fx-fill: #000000;
-    -fx-font-size: 12px;
-    -fx-font-family: "System Bold";
-    -fx-alignment: center_left;
-    -fx-padding: 5;
-}
-
-.alarm_details_pane CheckBox {
-    -fx-background-color: #D8D8D8;
-    -fx-pref-width: 80;
-    -fx-pref-height: 30;
-    -fx-text-fill: #000000;
-    -fx-padding: 5;
+    -fx-font-size: 30px;
+    -fx-font-family: "Calibri Light";
     -fx-alignment: center_left;
 }
 
-/* Contenedor de la derecha para la configuración de alarma */
-.alarm_config_container {
-    -fx-background-color: #D8D8D8;
-    -fx-border-color: #000000;
+
+/* Dashboard panel labels */
+.dashboard_pane_container {
+    -fx-background-color: #DDDDDD;
     -fx-padding: 10;
 }
 
-.alarm_config_text {
-    -fx-fill: #000000;
-    -fx-font-size: 12px;
-    -fx-font-family: "System Bold";
-    -fx-padding: 10;
+.dashboard_pane_container Pane {
+    -fx-background-radius: 10;
+    -fx-pref-width: 165;
+    -fx-pref-height: 111;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, #AAAAAA, 5 ,0, 0, 6);
 }
+
+.alt_dashboard_pane_container{
+    -fx-background-radius: 10;
+    -fx-pref-width: 400;
+    -fx-pref-height: 515;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5 ,0, 0, 6);
+}
+

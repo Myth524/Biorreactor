@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.PerGauge">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.PerGaugeController">
     <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
     </VBox>
@@ -19,37 +19,29 @@
         </font>
     </Text>
    <HBox layoutX="73.0" layoutY="157.0" prefHeight="500.0" prefWidth="700.0">
-      <children>
-         <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
-            <children>
-               <Label layoutX="55.0" layoutY="48.0" text="Set point:" />
-               <Label layoutX="31.0" layoutY="95.0" text="Process Value:" />
-               <TextField layoutX="119.0" layoutY="44.0" prefHeight="26.0" prefWidth="100.0" />
-               <Label layoutX="119.0" layoutY="95.0" text="Label" />
-            </children>
-         </AnchorPane>
-         <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
-            <children>
-               <Button layoutX="81.0" layoutY="62.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="ON" />
-               <Button layoutX="81.0" layoutY="112.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="OFF" />
-               <Text layoutX="80.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Mode" />
-               <Button layoutX="81.0" layoutY="250.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="Alarm Setting" />
-            </children>
-         </AnchorPane>
-         <AnchorPane prefHeight="200.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
-            <children>
-               <Text layoutX="102.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gains" />
-               <Label layoutX="20.0" layoutY="65.0" text="Proportional:" />
-               <Label layoutX="20.0" layoutY="145.0" text="Integral:" />
-               <Text layoutX="101.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Limits" />
-               <Label layoutX="40.0" layoutY="261.0" text="Low Limit" />
-               <Label layoutX="147.0" layoutY="261.0" text="Set High" />
-               <TextField layoutX="28.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
-               <TextField layoutX="132.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
-               <TextField layoutX="17.0" layoutY="163.0" prefHeight="26.0" prefWidth="74.0" />
-               <TextField layoutX="17.0" layoutY="83.0" prefHeight="26.0" prefWidth="74.0" />
-            </children>
-         </AnchorPane>
-      </children>
+      <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+         <Label layoutX="55.0" layoutY="48.0" text="Set point:" />
+         <Label layoutX="31.0" layoutY="95.0" text="Process Value:" />
+         <TextField fx:id="st_text" layoutX="119.0" layoutY="44.0" prefHeight="26.0" prefWidth="100.0" />
+         <Label fx:id="pv_label" layoutX="119.0" layoutY="95.0" text="Label" />
+      </AnchorPane>
+      <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+         <Button fx:id="on_btn" layoutX="81.0" layoutY="62.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="ON" />
+         <Button fx:id="off_btn" layoutX="81.0" layoutY="112.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="OFF" />
+         <Text layoutX="80.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Mode" />
+         <Button fx:id="alarmSettings_btn" layoutX="81.0" layoutY="250.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="Alarm Setting" />
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+         <Text layoutX="102.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gains" />
+         <Label layoutX="20.0" layoutY="65.0" text="Proportional:" />
+         <Label layoutX="20.0" layoutY="145.0" text="Integral:" />
+         <Text layoutX="101.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Limits" />
+         <Label layoutX="40.0" layoutY="261.0" text="Low Limit" />
+         <Label layoutX="147.0" layoutY="261.0" text="Set High" />
+         <TextField fx:id="low_text" layoutX="28.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
+         <TextField fx:id="high_text" layoutX="132.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
+         <TextField fx:id="integral_text" layoutX="17.0" layoutY="163.0" prefHeight="26.0" prefWidth="74.0" />
+         <TextField fx:id="proportional_text" layoutX="17.0" layoutY="83.0" prefHeight="26.0" prefWidth="74.0" />
+      </AnchorPane>
    </HBox>
 </AnchorPane>

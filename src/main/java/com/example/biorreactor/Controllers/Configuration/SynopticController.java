@@ -1,9 +1,7 @@
 package com.example.biorreactor.Controllers.Configuration;
 
-import com.example.biorreactor.Models.AddRow;
-import com.example.biorreactor.Models.Biorreactor;
-import com.example.biorreactor.Models.Loop;
-import com.example.biorreactor.Models.Pump;
+import com.example.biorreactor.Models.*;
+import com.example.biorreactor.Views.ViewFactory;
 import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,6 +69,11 @@ public class SynopticController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addListeners();
+
+        pump1_btn.setOnAction(event -> onPumps());
+        pump2_btn.setOnAction(event -> onPumps());
+        pump3_btn.setOnAction(event -> onPumps());
+
 
         // Tabla ph
         AddRow phRow = new AddRow();
@@ -216,6 +219,16 @@ public class SynopticController implements Initializable {
             System.out.println("\nDate: " + formattedDate);
         }
     }
+
+    private void onPumps() {
+
+        ViewFactory viewFactory = ViewModel.getInstance().getViewFactory();
+        ViewModel.getInstance().getViewFactory().getconfigurationSelectedMenuItem().set("Pumps");
+        ConfigurationMenuController configMenuController = ViewModel.getInstance().getConfigurationMenuController();
+        configMenuController.onPumps();
+
+    }
+
 
     private void onStart() {
         start_btn.setOnMouseClicked(event -> {

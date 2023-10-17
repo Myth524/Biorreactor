@@ -24,6 +24,7 @@ public class ConfigurationMenuController implements Initializable {
     }
 
     private void addListeners() {
+        ViewModel.getInstance().setConfigurationMenuController(this);
         summary_btn.setOnAction(event -> onSummary());
         alarms_btn.setOnAction(event -> onAlarms());
         graphs_btn.setOnAction(event -> onGraphs());
@@ -55,7 +56,7 @@ public class ConfigurationMenuController implements Initializable {
         handleButtonClick("Gauge", gauge_btn);
     }
 
-    private void onPumps() {
+    void onPumps() {
         handleButtonClick("Pumps", pumps_btn);
     }
 
