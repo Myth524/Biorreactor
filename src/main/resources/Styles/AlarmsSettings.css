@@ -1,0 +1,68 @@
+/* Contenedor principal */
+.alarm_settings_container {
+    -fx-background-color: #DDDDDD;
+    -fx-alignment: center;
+}
+
+/* Contenedor de la izquierda con detalles de alarma */
+.alarm_details_container {
+    -fx-background-color: #FFFFFF;
+}
+
+.alarm_details_pane {
+    -fx-background-color: #D8D8D8;
+    -fx-border-color: #000000;
+    -fx-padding: 10;
+    -fx-background-radius: 10;
+}
+
+.alarm_details_pane Label {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #000000;
+    -fx-pref-width: 50;
+    -fx-pref-height: 30;
+    -fx-alignment: center;
+    -fx-padding: 5;
+}
+
+.alarm_details_pane TextField {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #000000;
+    -fx-pref-width: 50;
+    -fx-pref-height: 30;
+    -fx-alignment: center;
+    -fx-padding: 5;
+}
+
+.alarm_details_pane Text {
+    -fx-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-family: "System Bold";
+    -fx-alignment: center_left;
+    -fx-padding: 5;
+}
+
+.alarm_details_pane CheckBox {
+    -fx-background-color: #D8D8D8;
+    -fx-pref-width: 80;
+    -fx-pref-height: 30;
+    -fx-text-fill: #000000;
+    -fx-padding: 5;
+    -fx-alignment: center_left;
+}
+
+/* Contenedor de la derecha para la configuración de alarma */
+.alarm_config_container {
+    -fx-background-color: #D8D8D8;
+    -fx-border-color: #000000;
+    -fx-padding: 10;
+}
+
+.alarm_config_text {
+    -fx-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-family: "System Bold";
+    -fx-padding: 10;
+}

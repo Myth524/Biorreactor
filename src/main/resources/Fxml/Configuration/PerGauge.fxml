@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.PerGauge">
+    <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
+    </VBox>
+    <Text layoutX="384.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alt_title_container" text="Gague">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Text>
+   <HBox layoutX="73.0" layoutY="157.0" prefHeight="500.0" prefWidth="700.0">
+      <children>
+         <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+            <children>
+               <Label layoutX="55.0" layoutY="48.0" text="Set point:" />
+               <Label layoutX="31.0" layoutY="95.0" text="Process Value:" />
+               <TextField layoutX="119.0" layoutY="44.0" prefHeight="26.0" prefWidth="100.0" />
+               <Label layoutX="119.0" layoutY="95.0" text="Label" />
+            </children>
+         </AnchorPane>
+         <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+            <children>
+               <Button layoutX="81.0" layoutY="62.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="ON" />
+               <Button layoutX="81.0" layoutY="112.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="OFF" />
+               <Text layoutX="80.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Mode" />
+               <Button layoutX="81.0" layoutY="250.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="Alarm Setting" />
+            </children>
+         </AnchorPane>
+         <AnchorPane prefHeight="200.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
+            <children>
+               <Text layoutX="102.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gains" />
+               <Label layoutX="20.0" layoutY="65.0" text="Proportional:" />
+               <Label layoutX="20.0" layoutY="145.0" text="Integral:" />
+               <Text layoutX="101.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Limits" />
+               <Label layoutX="40.0" layoutY="261.0" text="Low Limit" />
+               <Label layoutX="147.0" layoutY="261.0" text="Set High" />
+               <TextField layoutX="28.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
+               <TextField layoutX="132.0" layoutY="283.0" prefHeight="26.0" prefWidth="74.0" />
+               <TextField layoutX="17.0" layoutY="163.0" prefHeight="26.0" prefWidth="74.0" />
+               <TextField layoutX="17.0" layoutY="83.0" prefHeight="26.0" prefWidth="74.0" />
+            </children>
+         </AnchorPane>
+      </children>
+   </HBox>
+</AnchorPane>

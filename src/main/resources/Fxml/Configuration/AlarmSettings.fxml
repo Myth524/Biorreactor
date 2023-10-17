@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.AlarmSettings">
+    <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
+    </VBox>
+    <Text layoutX="384.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alt_title_container" text="Alarm Setting">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Text>
+    <VBox layoutX="25.0" layoutY="163.0" prefHeight="515.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" styleClass="dashboard_pane_container">
+        <AnchorPane prefHeight="175.0" prefWidth="200.0" styleClass="alarm_panel">
+            <Text layoutX="44.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Loop:" />
+            <Label layoutX="59.0" layoutY="61.0" text="ST:" styleClass="alarm_label" />
+            <Label layoutX="261.0" layoutY="61.0" text="PV:" styleClass="alarm_label" />
+            <TextField fx:id="stText" layoutX="99.0" layoutY="57.0" prefHeight="26.0" prefWidth="46.0" style="-fx-background-color: FFFFFF;" styleClass="alarm_input" />
+            <Label fx:id="pvLabel" layoutX="300.0" layoutY="61.0" text="Label" styleClass="alarm_label" />
+            <Label fx:id="stUnits" layoutX="164.0" layoutY="61.0" text="Label" styleClass="alarm_label" />
+            <Label fx:id="pvUnits" layoutX="362.0" layoutY="61.0" text="Label" styleClass="alarm_label" />
+            <Label fx:id="stUnits1" layoutX="131.0" layoutY="14.0" text="Label" styleClass="alarm_label" />
+        </AnchorPane>
+        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="175.0" prefWidth="200.0" styleClass="alarm_panel">
+            <Text layoutX="43.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Absolute:" />
+            <CheckBox layoutX="434.0" layoutY="31.0" mnemonicParsing="false" text="Enable" styleClass="alarm_checkbox" />
+            <CheckBox layoutX="434.0" layoutY="127.0" mnemonicParsing="false" text="Audible" styleClass="alarm_checkbox" />
+            <Text layoutX="43.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Low Limit" styleClass="alarm_label" />
+            <Text layoutX="206.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Limit" styleClass="alarm_label" />
+            <TextField layoutX="31.0" layoutY="86.0" prefHeight="26.0" prefWidth="82.0" styleClass="alarm_input" />
+            <TextField layoutX="192.0" layoutY="86.0" prefHeight="26.0" prefWidth="82.0" styleClass="alarm_input" />
+        </AnchorPane>
+        <AnchorPane layoutX="10.0" layoutY="210.0" prefHeight="175.0" prefWidth="200.0" styleClass="alarm_panel">
+            <Text layoutX="49.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deviation:" />
+            <Text layoutX="203.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="High Limit" styleClass="alarm_label" />
+            <Text layoutX="43.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Low Limit" styleClass="alarm_label" />
+            <TextField layoutX="34.0" layoutY="94.0" prefHeight="26.0" prefWidth="82.0" styleClass="alarm_input" />
+            <TextField layoutX="189.0" layoutY="94.0" prefHeight="26.0" prefWidth="82.0" styleClass="alarm_input" />
+            <CheckBox layoutX="441.0" layoutY="31.0" mnemonicParsing="false" text="Enable" styleClass="alarm_checkbox" />
+            <CheckBox layoutX="441.0" layoutY="120.0" mnemonicParsing="false" text="Audible" styleClass="alarm_checkbox" />
+        </AnchorPane>
+    </VBox>
+    <VBox layoutX="625.0" layoutY="163.0" prefHeight="515.0" prefWidth="200.0" style="-fx-background-color: #D8D8D8;" styleClass="dashboard_pane_container">
+        <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose loops to shutdown when alarm triggered" styleClass="alarm_label" />
+        </children>
+    </VBox>
+</AnchorPane>
