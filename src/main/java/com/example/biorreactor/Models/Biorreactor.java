@@ -1,11 +1,13 @@
 package com.example.biorreactor.Models;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 
 import java.util.ArrayList;
@@ -138,6 +140,87 @@ public class Biorreactor {
     public void setCalibrations(ArrayList<Calibration> calibrations) {
         this.calibrations = calibrations;
     }
+    public Loop getLoopByName(String name) {
+        int i=0;
+        while (i < loops.size() && !loops.get(i).getName().equals(name)){
+            i++;
+        }
+        if(i<loops.size()){
+            return loops.get(i);
+        }else {
+            return null;
+        }
+    }
+
+    public int getLoopPos(String name){
+        int i=0;
+        while (i < loops.size() && !loops.get(i).getName().equals(name)){
+            i++;
+        }
+        return i;
+    }
+    public Pump getPumpsByName(String name) {
+        int i=0;
+        while (i < pumps.size() && !pumps.get(i).getName().equals(name)){
+            i++;
+        }
+        if(i<pumps.size()){
+            return pumps.get(i);
+        }else {
+            return null;
+        }
+    }
+
+    public void shutDownLoop (ArrayList<Loop> loops) {
+        for (Loop loop : loops) {
+            getLoopByName(loop.getName()).setSt(0);
+        }
+    }
+
+    public void shutDownPumps (ArrayList<Pump> pumps) {
+        for (Pump pump : pumps) {
+            getPumpsByName(pump.getName()).setSt(0);
+        }
+    }
+
+    public boolean checkAlarmsCondition(Alarm alarms, Loop loop) {
+        double loopValue = loop.pvProperty().get();
+        return Double.compare(alarms.getAbsHigh(), loopValue) == 0 ||
+                Double.compare(alarms.getAbsLow(), loopValue) == 0 ||
+                Double.compare(alarms.getDevLow(), loopValue) == 0 ||
+                Double.compare(alarms.getDevHigh(), loopValue) == 0;
+
+    }
+
+    public void checkAlarms() {
+        for (Loop loop : loops) {
+            Alarm alarms = loop.getAlarms().get(loop.getAlarms().size()-1);
+                if (alarms.isActive() && alarms.isOn() && checkAlarmsCondition(alarms, loop)) {
+                    if (!alarms.getLoopsSD().isEmpty()) {
+                        shutDownLoop(alarms.getLoopsSD());
+                    }
+                    if (!alarms.getPumpsSD().isEmpty()) {
+                        shutDownPumps(alarms.getPumpsSD());
+                    }
+                    if (alarms.isAbsEn() || alarms.isDevEn()) {
+                        showErrorAlert(loop);
+                    }
+                    alarms.setActive(false);
+                    alarms.setTriggered(true);
+                }
+        }
+    }
+
+    public void showErrorAlert(Loop loop) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Se disparó la alarma de: " + loop.getName());
+            alert.showAndWait();
+        });
+    }
+
     public void printToConsole() {
         System.out.println("Crop Name: " + cropName.get());
         System.out.println("Date: " + date.getValue());

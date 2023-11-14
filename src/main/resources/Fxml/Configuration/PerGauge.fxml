@@ -6,18 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.PerGaugeController">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
     </VBox>
-    <Text layoutX="384.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="alt_title_container" text="Gague">
-        <font>
-            <Font name="System Bold" size="12.0" />
-        </font>
-    </Text>
    <HBox layoutX="73.0" layoutY="157.0" prefHeight="500.0" prefWidth="700.0">
       <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
          <Label layoutX="55.0" layoutY="48.0" text="Set point:" />
@@ -44,4 +38,5 @@
          <TextField fx:id="proportional_text" layoutX="17.0" layoutY="83.0" prefHeight="26.0" prefWidth="74.0" />
       </AnchorPane>
    </HBox>
+   <Label fx:id="title_label" layoutX="411.0" layoutY="103.0" text="Label" />
 </AnchorPane>

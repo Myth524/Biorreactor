@@ -306,6 +306,8 @@
 
         }
 
+        // Agregar el cambio de estilo al boton
+
         private boolean isValidInteger(String input) {
             try {
                 Integer.parseInt(input);

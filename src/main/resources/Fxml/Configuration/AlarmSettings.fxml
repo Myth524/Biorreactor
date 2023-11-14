@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biorreactor.Controllers.Configuration.AlarmSettingsController">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
     </VBox>
@@ -19,11 +19,11 @@
     </Text>
     <VBox layoutX="25.0" layoutY="163.0" prefHeight="515.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;">
         <AnchorPane prefHeight="175.0" prefWidth="400.0" style="-fx-border-color: #000000;">
-            <Text layoutX="11.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Loop:" />
+            <Text fx:id="selectedLoop_text" layoutX="11.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Loop:" />
             <Label layoutX="10.0" layoutY="40.0" text="ST:" />
-            <TextField fx:id="stText" layoutX="50.0" layoutY="40.0" prefHeight="26.0" prefWidth="80.0" />
             <Label layoutX="150.0" layoutY="40.0" text="PV:" />
-            <TextField fx:id="pvText" layoutX="190.0" layoutY="40.0" prefHeight="26.0" prefWidth="80.0" />
+         <Label fx:id="st_label" layoutX="36.0" layoutY="40.0" text="Label" />
+         <Label fx:id="pv_label" layoutX="185.0" layoutY="40.0" text="Label" />
         </AnchorPane>
         <AnchorPane layoutX="10.0" layoutY="195.0" prefHeight="175.0" prefWidth="400.0" style="-fx-border-color: #000000;">
             <Text layoutX="11.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Absolute:" />

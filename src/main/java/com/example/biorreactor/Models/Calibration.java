@@ -8,28 +8,28 @@ import javafx.beans.property.StringProperty;
 public class Calibration {
 
     // Atributos
-    private StringProperty loopName; // (pH, DO)
+    private StringProperty probeName; // (pH, DO)
     private DoubleProperty currentValue;
     private DoubleProperty rawValue;
 
     // All args constructor
-    public Calibration(StringProperty loopName) {
-        this.loopName = loopName;
+    public Calibration(StringProperty probeName) {
+        this.probeName = probeName;
         this.currentValue = (new SimpleDoubleProperty(0));
         this.rawValue = (new SimpleDoubleProperty(0));
     }
 
     // Getters and Setters
     public String getLoopName() {
-        return loopName.get();
+        return probeName.get();
     }
 
     public StringProperty loopNameProperty() {
-        return loopName;
+        return probeName;
     }
 
     public void setLoopName(String loopName) {
-        this.loopName.set(loopName);
+        this.probeName.set(loopName);
     }
 
     public double getCurrentValue() {
@@ -57,7 +57,7 @@ public class Calibration {
     }
 
     public void printToConsole() {
-        System.out.println("Loop Name: " + loopName.get());
+        System.out.println("Probe Name: " + probeName.get());
         System.out.println("Current Value: " + currentValue.get());
         System.out.println("Raw Value: " + rawValue.get());
     }

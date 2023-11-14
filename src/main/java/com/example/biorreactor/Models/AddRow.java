@@ -6,19 +6,18 @@ import java.util.ArrayList;
 
 public class AddRow {
 
-    private final StringProperty loopName; // (pH, Temperature, DO, Stirring Rate)
+    private final StringProperty loopName;
     private final DoubleProperty st;
     private final DoubleProperty pv;
-    private final BooleanProperty controlMode; // (ON or FALSE)
-    private ArrayList<Alarm> alarms; // (ABS low, ABS high, ABS Enable, DEV low, DEV high, DEV Enable)
-    private final StringProperty units; // (ph, DegC, %DO, RPM)
+    private final BooleanProperty controlMode;
+    private ArrayList<Alarm> alarms;
+    private final StringProperty units;
     private final DoubleProperty absLow;
     private final DoubleProperty absHigh;
     private final BooleanProperty absEn;
     private final DoubleProperty devLow;
     private final DoubleProperty devHigh;
     private final BooleanProperty devEn;
-
 
     public AddRow() {
         this.loopName = new SimpleStringProperty();
@@ -32,6 +31,7 @@ public class AddRow {
         this.devLow = (new SimpleDoubleProperty());
         this.devHigh = (new SimpleDoubleProperty());
         this.devEn = (new SimpleBooleanProperty());
+        this.alarms = null;
     }
 
     public String getLoopName() {
@@ -172,5 +172,12 @@ public class AddRow {
 
     public void setDevEn(boolean devEn) {
         this.devEn.set(devEn);
+    }
+
+    public Alarm getAlarm() {
+        if (alarms != null && !alarms.isEmpty()) {
+            return alarms.get(alarms.size() - 1);
+        }
+        return null;
     }
 }

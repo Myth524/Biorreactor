@@ -1,6 +1,9 @@
 package com.example.biorreactor.Views;
 
+import com.example.biorreactor.Controllers.Configuration.AlarmSettingsController;
 import com.example.biorreactor.Controllers.Configuration.ConfigurationController;
+import com.example.biorreactor.Controllers.Configuration.PerGaugeController;
+import com.example.biorreactor.Models.Loop;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +22,6 @@ public class ViewFactory {
     private AnchorPane summaryView;
     private AnchorPane calibrationView;
     private AnchorPane confLanding;
-
 
     public ViewFactory (){
         this.configurationSelectedMenuItem = new SimpleStringProperty("");
@@ -125,11 +127,30 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/LandingPage.fxml"));
         createStage(loader);
     }
+    public void showLoginWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
+        createStage(loader);
+    }
     public void showConfigurationWindow(){
         FXMLLoader loader  = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Configuration.fxml"));
         ConfigurationController configurationController =  new ConfigurationController();
         loader.setController(configurationController);
         createStage(loader);
+    }
+    public void showPerGaugeWindow(Loop selectedLoop) {
+        FXMLLoader loader  = new FXMLLoader(getClass().getResource("/Fxml/Configuration/PerGauge.fxml"));
+        PerGaugeController perGaugeController = new PerGaugeController();
+        loader.setController(perGaugeController);
+        createStage(loader);
+        perGaugeController.initData(selectedLoop);
+    }
+
+    public void showAlarmSettingsWindow(Loop selectedLoop) {
+        FXMLLoader loader  = new FXMLLoader(getClass().getResource("/Fxml/Configuration/AlarmSettings.fxml"));
+        AlarmSettingsController alarmSettingsController = new AlarmSettingsController();
+        loader.setController(alarmSettingsController);
+        createStage(loader);
+        alarmSettingsController.initData(selectedLoop);
     }
 
     /** Aux methods **/

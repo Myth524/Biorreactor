@@ -3,8 +3,11 @@ package com.example.biorreactor.Controllers.Configuration;
 import com.example.biorreactor.Models.AddRow;
 import com.example.biorreactor.Models.Alarm;
 import com.example.biorreactor.Models.Biorreactor;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.StringProperty;
+import com.example.biorreactor.Models.Loop;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,56 +15,120 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AlarmsController implements Initializable {
     public Button history_btn;
     public Button acknowAll_btn;
     public Button currentA_btn;
-    @FXML public TableView<AddRow> alarms_table;
-    @FXML public TableColumn<AddRow, StringProperty> loopNameCol;
-    @FXML public TableColumn<AddRow, DoubleProperty> absLowCol;
-    @FXML public TableColumn<AddRow, DoubleProperty> absHighCol;
-    @FXML public TableColumn<AddRow, Boolean> absEnCol;
-    @FXML public TableColumn<AddRow, DoubleProperty> devLowCol;
-    @FXML public TableColumn<AddRow, DoubleProperty> devHighCol;
-    @FXML public TableColumn<AddRow, Boolean> devEnCol;
+    @FXML
+    public TableView<AddRow> alarms_table;
+    @FXML
+    public TableColumn<AddRow, String> loopNameCol;
+    @FXML
+    public TableColumn<AddRow, Double> absLowCol;
+    @FXML
+    public TableColumn<AddRow, Double> absHighCol;
+    @FXML
+    public TableColumn<AddRow, Boolean> absEnCol;
+    @FXML
+    public TableColumn<AddRow, Double> devLowCol;
+    @FXML
+    public TableColumn<AddRow, Double> devHighCol;
+    @FXML
+    public TableColumn<AddRow, Boolean> devEnCol;
 
     Biorreactor biorreactor = Biorreactor.getInstance();
-    ObservableList<AddRow> list = FXCollections.observableArrayList();
+    ObservableList<AddRow> listAlarms = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (int i = 0; i < biorreactor.getLoops().size(); i++) {
-            ArrayList<Alarm> alarms = biorreactor.getLoops().get(i).getAlarms();
+        initializeTableColumns();
+        showAlarmsForActiveLoops();
+        addObservers();
 
-            for (Alarm alarm : alarms) {
-                AddRow row = new AddRow();
-                row.setLoopName(biorreactor.getLoops().get(i).getName());
-                row.setAbsLow(alarm.getAbsLow());
-                row.setAbsHigh(alarm.getAbsHigh());
-                row.setAbsEn(alarm.isAbsEn());
-                row.setDevLow(alarm.getDevLow());
-                row.setDevHigh(alarm.getDevHigh());
-                row.setDevEn(alarm.isDevEn());
-                list.add(row);
-            }
-        }
-
-        loopNameCol.setCellValueFactory(new PropertyValueFactory<>("loopName"));
-        absLowCol.setCellValueFactory(new PropertyValueFactory<>("absLow"));
-        absHighCol.setCellValueFactory(new PropertyValueFactory<>("absHigh"));
-        absEnCol.setCellValueFactory(new PropertyValueFactory<>("absEn"));
-        devLowCol.setCellValueFactory(new PropertyValueFactory<>("devLow"));
-        devHighCol.setCellValueFactory(new PropertyValueFactory<>("devHigh"));
-        devEnCol.setCellValueFactory(new PropertyValueFactory<>("devEn"));
-
-        alarms_table.setItems(list);
-
+        acknowAll_btn.setOnAction(event -> showAllAlarms());
+        currentA_btn.setOnAction(event -> showAlarmsForActiveLoops());
+        history_btn.setOnAction(event -> showHistoryAlarms());
     }
 
+    private void initializeTableColumns() {
+        loopNameCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLoopName()));
+        absLowCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getAbsLow()).asObject());
+        absHighCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getAbsHigh()).asObject());
+        absEnCol.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isAbsEn()));
+        devLowCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getDevLow()).asObject());
+        devHighCol.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getDevHigh()).asObject());
+        devEnCol.setCellValueFactory(cellData -> new SimpleBooleanProperty(cellData.getValue().isDevEn()));
+    }
+
+    private void addObservers() {
+        biorreactor.getLoops().forEach(loop -> {
+            loop.getAlarms().forEach(alarm -> {
+                alarm.absLowProperty().addListener((observable, oldValue, newValue) -> updateTable());
+                alarm.absHighProperty().addListener((observable, oldValue, newValue) -> updateTable());
+                alarm.absEnProperty().addListener((observable, oldValue, newValue) -> updateTable());
+                alarm.devLowProperty().addListener((observable, oldValue, newValue) -> updateTable());
+                alarm.devHighProperty().addListener((observable, oldValue, newValue) -> updateTable());
+                alarm.devEnProperty().addListener((observable, oldValue, newValue) -> updateTable());
+            });
+        });
+    }
+
+    private void updateTable() {
+        showAllAlarms();
+    }
+
+    private void showHistoryAlarms() {
+        listAlarms.clear();
+        biorreactor.getLoops().forEach(loop -> {
+            List<Alarm> historyAlarms = loop.getAlarms().stream()
+                    .filter(alarm -> alarm.isOn() && !alarm.isActive() && alarm.isTriggered())
+                    .toList();
+
+            historyAlarms.forEach(alarm -> listAlarms.add(createAddRow(loop, alarm)));
+        });
+        alarms_table.setItems(listAlarms);
+    }
+
+    private void showAlarmsForActiveLoops() {
+        listAlarms.clear();
+        biorreactor.getLoops().forEach(loop -> {
+            List<Alarm> activeAlarms = loop.getAlarms().stream()
+                    .filter(alarm -> alarm.isActive() && alarm.isOn() && !alarm.isTriggered())
+                    .toList();
+
+            activeAlarms.forEach(alarm -> listAlarms.add(createAddRow(loop, alarm)));
+        });
+        alarms_table.setItems(listAlarms);
+    }
+
+
+    private void showAllAlarms() {
+            listAlarms.clear();
+            biorreactor.getLoops().forEach(loop -> {
+                List<Alarm> allAlarms = loop.getAlarms().stream()
+                        .filter(Alarm::isOn)
+                        .toList();
+
+                allAlarms.forEach(alarm -> listAlarms.add(createAddRow(loop, alarm)));
+            });
+            alarms_table.setItems(listAlarms);
+    }
+
+    private AddRow createAddRow(Loop loop, Alarm alarm) {
+        AddRow row = new AddRow();
+        row.setLoopName(loop.getName());
+        row.setAbsLow(alarm.getAbsLow());
+        row.setAbsHigh(alarm.getAbsHigh());
+        row.setAbsEn(alarm.isAbsEn());
+        row.setDevLow(alarm.getDevLow());
+        row.setDevHigh(alarm.getDevHigh());
+        row.setDevEn(alarm.isDevEn());
+        return row;
+    }
 }

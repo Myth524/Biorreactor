@@ -13,7 +13,6 @@
      -fx-alignment: center;
      -fx-background-radius: 10;
      -fx-effect: dropshadow(two-pass-box, #AAAAAA, 5, 0, 0, 4);
-     -fx-alignment: center;
  }
 
  .dashboard_container ToggleButton FontAwesomeIconView {

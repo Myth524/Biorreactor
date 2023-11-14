@@ -1,8 +1,6 @@
 package com.example.biorreactor.Controllers.Configuration;
 
 import com.example.biorreactor.Models.*;
-import com.example.biorreactor.Views.ViewFactory;
-import javafx.beans.property.IntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -201,6 +199,10 @@ public class SynopticController implements Initializable {
         start_btn.setOnAction(event -> onStart());
         cropName.setOnAction(event -> fillCropName(cropName.getText()));
         date.setOnAction(event -> fillDate());
+        ph_btn.setOnAction(event -> onLoops("pH"));
+        DO_btn.setOnAction(event -> onLoops("DO"));
+        temp_btn.setOnAction(event -> onLoops("Temperature"));
+        stirring_btn.setOnAction(event -> onLoops("Stirring Rate"));
     }
 
     private void fillCropName(String cropName) {
@@ -221,12 +223,15 @@ public class SynopticController implements Initializable {
     }
 
     private void onPumps() {
-
-        ViewFactory viewFactory = ViewModel.getInstance().getViewFactory();
         ViewModel.getInstance().getViewFactory().getconfigurationSelectedMenuItem().set("Pumps");
         ConfigurationMenuController configMenuController = ViewModel.getInstance().getConfigurationMenuController();
         configMenuController.onPumps();
 
+    }
+
+    private void onLoops(String loopName) {
+        Loop selectedLoop = biorreactor.getLoopByName(loopName);
+        ViewModel.getInstance().getViewFactory().showPerGaugeWindow(selectedLoop);
     }
 
 
@@ -258,6 +263,11 @@ public class SynopticController implements Initializable {
         biorreactor.getPumps().get(2).setControlMode(!biorreactor.getPumps().get(2).isControlMode());
         currentPeriod = biorreactor.getPumps().get(2).getPeriod().get();
         biorreactor.getPumps().get(2).setPeriod(currentPeriod + 1);
+
+        Loop phLoop = biorreactor.getLoops().get(0);
+        phLoop.setSt(phLoop.getSt() + 1);
+        phLoop.setPv(phLoop.getPv() + 2);
+        phLoop.setControlMode(!phLoop.isControlMode());
 
     }
 
