@@ -269,6 +269,14 @@ public class SynopticController implements Initializable {
         phLoop.setPv(phLoop.getPv() + 2);
         phLoop.setControlMode(!phLoop.isControlMode());
 
+        Calibration phCalibration = biorreactor.getCalibrations().get(0);
+        phCalibration.setCurrentValue(phCalibration.getCurrentValue()+1);
+        phCalibration.setRawValue(phCalibration.getRawValue()+2);
+
+        Calibration DOCalibration = biorreactor.getCalibrations().get(1);
+        DOCalibration.setCurrentValue(DOCalibration.getCurrentValue()+2);
+        DOCalibration.setRawValue(DOCalibration.getRawValue()+4);
+
     }
 
     private void setButtonStyle(ToggleButton button, String styleClass) {

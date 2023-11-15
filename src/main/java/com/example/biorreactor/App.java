@@ -10,7 +10,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         ViewModel viewModel = ViewModel.getInstance();
-        viewModel.getViewFactory().showLoginWindow();
+        viewModel.getViewFactory().showConfigurationWindow();
 
         // Crear y ejecutar un hilo para revisar las alarmas constantemente
         Thread alarmThread = new Thread(() -> {

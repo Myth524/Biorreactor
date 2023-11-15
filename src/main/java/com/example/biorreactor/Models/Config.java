@@ -2,6 +2,8 @@ package com.example.biorreactor.Models;
 
 import javafx.beans.property.*;
 
+import java.sql.Time;
+
 public class Config {
 
     // Atributos
@@ -9,6 +11,7 @@ public class Config {
     private final DoubleProperty st;
     private final DoubleProperty pv;
     private final BooleanProperty controlMode;
+    private final ObjectProperty<Time> time;
     private final StringProperty units;
 
     // All args constructor
@@ -17,6 +20,7 @@ public class Config {
         this.st = st;
         this.pv = pv;
         this.controlMode = new SimpleBooleanProperty(false);
+        this.time = new SimpleObjectProperty<>(new Time(System.currentTimeMillis()));
         this.units = units;
     }
 
@@ -79,5 +83,17 @@ public class Config {
 
     public void setUnits(String units) {
         this.units.set(units);
+    }
+
+    public Time getTime() {
+        return time.get();
+    }
+
+    public ObjectProperty<Time> timeProperty() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time.set(time);
     }
 }
