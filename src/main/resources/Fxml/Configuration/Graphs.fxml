@@ -2,6 +2,7 @@
 
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
@@ -54,12 +55,14 @@
       <Spinner fx:id="from_spinner" layoutX="684.0" layoutY="25.0" prefHeight="25.0" prefWidth="109.0" />
       <Spinner fx:id="to_spinner" layoutX="684.0" layoutY="75.0" prefHeight="25.0" prefWidth="109.0" />
    </AnchorPane>
-    <LineChart fx:id="lineChart" layoutX="22.0" layoutY="234.0" prefHeight="440.0" prefWidth="806.0">
-        <xAxis>
-            <NumberAxis label="Time" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-            <NumberAxis label="PV" side="LEFT" />
-        </yAxis>
-    </LineChart>
+   <LineChart fx:id="lineChart" layoutX="22.0" layoutY="234.0" prefHeight="440.0" prefWidth="806.0">
+      <xAxis>
+         <NumberAxis label="Time" side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+         <NumberAxis label="PV" side="LEFT" />
+      </yAxis>
+   </LineChart>
+   <Button fx:id="zoomIn_btn" layoutX="696.0" layoutY="649.0" mnemonicParsing="false" text="Zoom In" />
+   <Button fx:id="zoomOut_btn" layoutX="757.0" layoutY="649.0" mnemonicParsing="false" text="Zoom Out" />
 </AnchorPane>

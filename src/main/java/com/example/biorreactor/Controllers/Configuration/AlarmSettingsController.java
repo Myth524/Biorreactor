@@ -210,21 +210,29 @@ public class AlarmSettingsController implements Initializable {
         pump1_checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> handleCheckboxSelectionPump(newValue, biorreactor.getPumpsByName("Pump 1")));
         pump2_checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> handleCheckboxSelectionPump(newValue, biorreactor.getPumpsByName("Pump 2")));
         pump3_checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> handleCheckboxSelectionPump(newValue, biorreactor.getPumpsByName("Pump 3")));
+
+        temp_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Temperature")));
+        ph_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("pH")));
+        do_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("DO")));
+        stirring_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Stirring Rate")));
+        pump1_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 1")));
+        pump2_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 2")));
+        pump3_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 3")));
     }
 
     private void handleCheckboxSelectionLoop(boolean isSelected, Loop cloop) {
-        if (isSelected && !loop.getAlarms().get(pos).getLoopsSD().contains(cloop)) {
-            loop.getAlarms().get(pos).getLoopsSD().add(cloop);
-        } else if (!isSelected && loop.getAlarms().get(pos).getLoopsSD().contains(cloop)) {
-            loop.getAlarms().get(pos).getLoopsSD().remove(cloop);
+        if (isSelected && !loop.getAlarms().get(posA).getLoopsSD().contains(cloop)) {
+            loop.getAlarms().get(posA).getLoopsSD().add(cloop);
+        } else if (!isSelected && loop.getAlarms().get(posA).getLoopsSD().contains(cloop)) {
+            loop.getAlarms().get(posA).getLoopsSD().remove(cloop);
         }
     }
 
     private void handleCheckboxSelectionPump(boolean isSelected, Pump pump) {
-        if (isSelected && !loop.getAlarms().get(pos).getPumpsSD().contains(pump)) {
-            loop.getAlarms().get(pos).getPumpsSD().add(pump);
-        } else if (!isSelected && loop.getAlarms().get(pos).getLoopsSD().contains(pump)) {
-            loop.getAlarms().get(pos).getPumpsSD().remove(pump);
+        if (isSelected && !loop.getAlarms().get(posA).getPumpsSD().contains(pump)) {
+            loop.getAlarms().get(posA).getPumpsSD().add(pump);
+        } else if (!isSelected && loop.getAlarms().get(posA).getLoopsSD().contains(pump)) {
+            loop.getAlarms().get(posA).getPumpsSD().remove(pump);
         }
     }
 
