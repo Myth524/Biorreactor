@@ -211,13 +211,6 @@ public class AlarmSettingsController implements Initializable {
         pump2_checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> handleCheckboxSelectionPump(newValue, biorreactor.getPumpsByName("Pump 2")));
         pump3_checkbox.selectedProperty().addListener((observable, oldValue, newValue) -> handleCheckboxSelectionPump(newValue, biorreactor.getPumpsByName("Pump 3")));
 
-        temp_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Temperature")));
-        ph_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("pH")));
-        do_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("DO")));
-        stirring_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Stirring Rate")));
-        pump1_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 1")));
-        pump2_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 2")));
-        pump3_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 3")));
     }
 
     private void handleCheckboxSelectionLoop(boolean isSelected, Loop cloop) {
@@ -231,7 +224,7 @@ public class AlarmSettingsController implements Initializable {
     private void handleCheckboxSelectionPump(boolean isSelected, Pump pump) {
         if (isSelected && !loop.getAlarms().get(posA).getPumpsSD().contains(pump)) {
             loop.getAlarms().get(posA).getPumpsSD().add(pump);
-        } else if (!isSelected && loop.getAlarms().get(posA).getLoopsSD().contains(pump)) {
+        } else if (!isSelected && loop.getAlarms().get(posA).getPumpsSD().contains(pump)) {
             loop.getAlarms().get(posA).getPumpsSD().remove(pump);
         }
     }
@@ -251,6 +244,13 @@ public class AlarmSettingsController implements Initializable {
             devHigh_text.setText(String.valueOf(alarms.get(posA).getDevHigh()));
             absEn_checkbox.setSelected(alarms.get(posA).isAbsEn());
             devEn_checkbox.setSelected(alarms.get(posA).isDevEn());
+            temp_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Temperature")));
+            ph_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("pH")));
+            do_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("DO")));
+            stirring_checkbox.setSelected(loop.getAlarms().get(posA).getLoopsSD().contains(biorreactor.getLoopByName("Stirring Rate")));
+            pump1_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 1")));
+            pump2_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 2")));
+            pump3_checkbox.setSelected(loop.getAlarms().get(posA).getPumpsSD().contains(biorreactor.getPumpsByName("Pump 3")));
         } catch (Exception e) {
             e.printStackTrace();
         }

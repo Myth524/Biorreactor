@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/Synoptic.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="700.0" prefWidth="850.0" styleClass="dashboard_container" stylesheets="@../../Styles/PerGuage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox prefHeight="50.0" prefWidth="850.0" styleClass="title_container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Configurations" />
     </VBox>
@@ -20,10 +20,10 @@
          <Label fx:id="pv_label" layoutX="119.0" layoutY="95.0" text="Label" />
       </AnchorPane>
       <AnchorPane prefHeight="500.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
-         <Button fx:id="on_btn" layoutX="81.0" layoutY="62.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="ON" />
-         <Button fx:id="off_btn" layoutX="81.0" layoutY="112.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="OFF" />
+         <Button fx:id="on_btn" layoutX="71.0" layoutY="60.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="ON" />
+         <Button fx:id="off_btn" layoutX="71.0" layoutY="112.0" mnemonicParsing="false" styleClass="alt2_ToggleButton_container" text="OFF" />
          <Text layoutX="80.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Control Mode" />
-         <Button fx:id="alarmSettings_btn" layoutX="81.0" layoutY="250.0" mnemonicParsing="false" styleClass="alt_ToggleButton_container" text="Alarm Setting" />
+         <Button fx:id="alarmSettings_btn" layoutX="72.0" layoutY="250.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="112.0" styleClass="alt_ToggleButton_container" text="Alarm Setting" />
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="233.0" style="-fx-background-color: #D8D8D8; -fx-border-color: #000000;">
          <Text layoutX="102.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gains" />

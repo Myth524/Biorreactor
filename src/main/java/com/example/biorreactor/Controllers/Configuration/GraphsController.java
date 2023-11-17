@@ -3,6 +3,7 @@ package com.example.biorreactor.Controllers.Configuration;
 import com.example.biorreactor.DataBase.LoopData;
 import com.example.biorreactor.DataBase.PersistenceHandler;
 import com.example.biorreactor.Models.Biorreactor;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -19,6 +20,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -56,6 +60,7 @@ public class GraphsController implements Initializable {
     public Button zoomOut_btn;
 
     Biorreactor biorreactor = Biorreactor.getInstance();
+    private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -286,6 +291,7 @@ public class GraphsController implements Initializable {
                 data.getNode().setVisible(newValue); // Oculta o muestra los nodos de la serie
             }
         });
+        executor.scheduleAtFixedRate(this::updateChart, 0, 30, TimeUnit.SECONDS);
     }
 
     private void loadTempDataFromDatabase(int biorreactorId) {
@@ -329,10 +335,11 @@ public class GraphsController implements Initializable {
 
         @Override
         public String toString(Number object) {
-            long timestampMillis = object.longValue();
-            LocalDateTime dateTime = LocalDateTime.MIN.plusSeconds(timestampMillis);
+            long timestampMinutes = object.longValue();
+            LocalDateTime dateTime = LocalDateTime.MIN.plusMinutes(timestampMinutes);
             return dateTime.format(dateFormatter);
         }
+
 
         @Override
         public Number fromString(String string) {
@@ -444,9 +451,16 @@ public class GraphsController implements Initializable {
 
     // Método para actualizar la gráfica con las series actualizadas
     private void updateChart() {
-        lineChart.getData().clear(); // Borra todas las series existentes
-        lineChart.getData().addAll(phSeries, tempSeries, doSeries, stirringSeries); // Agrega las series actualizadas
+        Platform.runLater(() -> {
+            int biorreactorId = 1; // O el ID correspondiente
+            loadPhDataFromDatabase(biorreactorId);
+            loadTempDataFromDatabase(biorreactorId);
+            loadDODataFromDatabase(biorreactorId);
+            loadStirringDataFromDatabase(biorreactorId);
+        });
     }
+
+
     private void updateXAxisRange() {
         // Obtener los valores seleccionados en los Spinners
         int fromValue = (int) from_spinner.getValue();
@@ -466,9 +480,15 @@ public class GraphsController implements Initializable {
         xAxis.setUpperBound(newUpperBound);
     }
     private void configureTimeRangeSpinners() {
-        // Definir los valores iniciales y los límites de los Spinners
-        SpinnerValueFactory<Integer> fromValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0);
-        SpinnerValueFactory<Integer> toValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 100);
+        // Obtener el eje X
+        NumberAxis xAxis = (NumberAxis) lineChart.getXAxis();
+
+        // Definir los valores iniciales y los límites de los Spinners basados en el eje X
+        double lowerBound = xAxis.getLowerBound();
+        double upperBound = xAxis.getUpperBound();
+
+        SpinnerValueFactory<Integer> fromValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory((int) lowerBound, (int) upperBound, (int) lowerBound);
+        SpinnerValueFactory<Integer> toValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory((int) lowerBound, (int) upperBound, (int) upperBound);
 
         // Asignar los valores iniciales y límites a los Spinners
         from_spinner.setValueFactory(fromValueFactory);
@@ -478,4 +498,5 @@ public class GraphsController implements Initializable {
         from_spinner.valueProperty().addListener((observable, oldValue, newValue) -> updateXAxisRange());
         to_spinner.valueProperty().addListener((observable, oldValue, newValue) -> updateXAxisRange());
     }
+
 }

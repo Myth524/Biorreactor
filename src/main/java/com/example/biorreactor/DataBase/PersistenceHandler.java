@@ -1,6 +1,9 @@
 package com.example.biorreactor.DataBase;
 
 
+import com.example.biorreactor.Models.*;
+
+import java.sql.PreparedStatement;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,21 +83,32 @@ public class PersistenceHandler implements IPersistenceHandler {
         return data;
     }
 
+    public void insertLoop(int biorreactorId, String loopName, double setpoint, double processValue) {
+        String insertLoopQuery = "INSERT INTO Loops (loopName, setpoint, processValue, FK_biorreactor_id, timestamp) VALUES (?, ?, ?, ?, NOW())";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertLoopQuery);
+            preparedStatement.setString(1, loopName);
+            preparedStatement.setDouble(2, setpoint);
+            preparedStatement.setDouble(3, processValue);
+            preparedStatement.setInt(4, biorreactorId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     /***
 
-     Creacion base de datos
-
-     -- Crear la tabla 'User'
+     -- Crear la tabla 'Users'
      CREATE TABLE Users (
-     user_id INT PRIMARY KEY,
+     user_id SERIAL PRIMARY KEY,
      username VARCHAR(255),
      password VARCHAR(255)
      );
 
      -- Crear la tabla 'Biorreactor'
      CREATE TABLE Biorreactor (
-     biorreactor_id INT PRIMARY KEY,
+     biorreactor_id SERIAL PRIMARY KEY,
      nombre VARCHAR(255),
      fecha_creacion DATE,
      FK_user_id INT,
@@ -103,7 +117,7 @@ public class PersistenceHandler implements IPersistenceHandler {
 
      -- Crear la tabla 'Loops' con el campo 'timestamp'
      CREATE TABLE Loops (
-     loop_id INT PRIMARY KEY,
+     loop_id SERIAL PRIMARY KEY,
      loopName VARCHAR(255),
      setpoint DECIMAL,
      processValue DECIMAL,
@@ -114,17 +128,21 @@ public class PersistenceHandler implements IPersistenceHandler {
 
      -- Crear la tabla 'Alarms'
      CREATE TABLE Alarms (
-     alarm_id INT PRIMARY KEY,
-     highLimit DECIMAL,
-     lowLimit DECIMAL,
-     controlMode BOOLEAN,
+     alarm_id SERIAL PRIMARY KEY,
+     absHigh DECIMAL,
+     absLow DECIMAL,
+     absEn BOOLEAN,
+     devLow DECIMAL,
+     devHigh DECIMAL,
+     devEn BOOLEAN,
+     isActive BOOLEAN,
      FK_loop_id INT,
      FOREIGN KEY (FK_loop_id) REFERENCES Loops(loop_id)
      );
 
      -- Crear la tabla 'PIDs'
      CREATE TABLE PIDs (
-     id INT PRIMARY KEY,
+     pid_id SERIAL PRIMARY KEY,
      normalizing DECIMAL,
      proportional DECIMAL,
      integral DECIMAL,
@@ -136,7 +154,7 @@ public class PersistenceHandler implements IPersistenceHandler {
 
      -- Crear la tabla 'Calibrations'
      CREATE TABLE Calibrations (
-     calibration_id INT PRIMARY KEY,
+     calibration_id SERIAL PRIMARY KEY,
      probeName VARCHAR(255),
      span DECIMAL,
      zero DECIMAL,
@@ -146,11 +164,11 @@ public class PersistenceHandler implements IPersistenceHandler {
 
      -- Crear la tabla 'Pumps'
      CREATE TABLE Pumps (
-     pump_id INT PRIMARY KEY,
+     pump_id SERIAL PRIMARY KEY,
      pumpName VARCHAR(255),
      pumpMode VARCHAR(50),
      setpoint DECIMAL,
-     processValue VARCHAR(255),
+     processValue DECIMAL,
      pumpPeriod INT,
      controlMode BOOLEAN,
      timestamp TIMESTAMP,
@@ -158,18 +176,13 @@ public class PersistenceHandler implements IPersistenceHandler {
      FOREIGN KEY (FK_biorreactor_id) REFERENCES Biorreactor(biorreactor_id)
      );
 
-     ***/
-
-    /***
-
-     Inserciones
-
-     INSERT INTO users (user_id, username, password) VALUES (1,'admin', '12345');
+     -- Insertar un dato en la tabla 'Users'
+     INSERT INTO Users (username, password) VALUES ('admin', '12345');
 
      -- Insertar un dato en la tabla 'Biorreactor'
-     INSERT INTO Biorreactor (biorreactor_id, nombre, fecha_creacion, FK_user_id)
-     VALUES
-     (1, 'Biorreactor1', '2023-11-14', 1);
+     INSERT INTO Biorreactor (nombre, fecha_creacion, FK_user_id)
+     VALUES ('Biorreactor1', '2023-11-14', 1);
+
 
      -- Insertar 10 datos para el bucle pH
      INSERT INTO Loops (loop_id, loopName, setpoint, processValue, FK_biorreactor_id, timestamp)
@@ -226,6 +239,17 @@ public class PersistenceHandler implements IPersistenceHandler {
      (38, 'Stirring Rate', 325, 335, 1, '2023-11-14 12:14:00'),
      (39, 'Stirring Rate', 320, 330, 1, '2023-11-14 12:16:00'),
      (40, 'Stirring Rate', 330, 340, 1, '2023-11-14 12:18:00');
+
+     ***/
+
+    /***
+
+     INSERT INTO Loops (loop_id, loopName, setpoint, processValue, FK_biorreactor_id, timestamp)
+     VALUES
+     (45, 'pH', 7.1, 8.3, 1, '2023-11-14 12:20:00'),
+     (46, 'Temperature', 26.3, 27.2, 1, '2023-11-14 12:20:00'),
+     (47, 'DO', 5.9, 6.2, 1, '2023-11-14 12:20:00'),
+     (48, 'Stirring Rate', 340, 390, 1, '2023-11-14 12:20:00')
 
      ***/
 }

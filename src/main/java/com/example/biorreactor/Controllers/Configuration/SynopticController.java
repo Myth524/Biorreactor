@@ -245,38 +245,6 @@ public class SynopticController implements Initializable {
                 setButtonStyle(start_btn, "dashboard_container");
             }
         });
-
-        biorreactor.getPumps().get(0).setSt(biorreactor.getPumps().get(0).getSt()+1);
-        biorreactor.getPumps().get(0).setPv(biorreactor.getPumps().get(0).getPv()+2);
-        biorreactor.getPumps().get(0).setControlMode(!biorreactor.getPumps().get(0).isControlMode());
-        int currentPeriod = biorreactor.getPumps().get(0).getPeriod().get();
-        biorreactor.getPumps().get(0).setPeriod(currentPeriod + 1);
-
-        biorreactor.getPumps().get(1).setSt(biorreactor.getPumps().get(1).getSt()+1);
-        biorreactor.getPumps().get(1).setPv(biorreactor.getPumps().get(1).getPv()+2);
-        biorreactor.getPumps().get(1).setControlMode(!biorreactor.getPumps().get(1).isControlMode());
-        currentPeriod = biorreactor.getPumps().get(1).getPeriod().get();
-        biorreactor.getPumps().get(1).setPeriod(currentPeriod + 1);
-
-        biorreactor.getPumps().get(2).setSt(biorreactor.getPumps().get(2).getSt()+1);
-        biorreactor.getPumps().get(2).setPv(biorreactor.getPumps().get(2).getPv()+2);
-        biorreactor.getPumps().get(2).setControlMode(!biorreactor.getPumps().get(2).isControlMode());
-        currentPeriod = biorreactor.getPumps().get(2).getPeriod().get();
-        biorreactor.getPumps().get(2).setPeriod(currentPeriod + 1);
-
-        Loop phLoop = biorreactor.getLoops().get(0);
-        phLoop.setSt(phLoop.getSt() + 1);
-        phLoop.setPv(phLoop.getPv() + 2);
-        phLoop.setControlMode(!phLoop.isControlMode());
-
-        Calibration phCalibration = biorreactor.getCalibrations().get(0);
-        phCalibration.setCurrentValue(phCalibration.getCurrentValue()+1);
-        phCalibration.setRawValue(phCalibration.getRawValue()+2);
-
-        Calibration DOCalibration = biorreactor.getCalibrations().get(1);
-        DOCalibration.setCurrentValue(DOCalibration.getCurrentValue()+2);
-        DOCalibration.setRawValue(DOCalibration.getRawValue()+4);
-
     }
 
     private void setButtonStyle(ToggleButton button, String styleClass) {

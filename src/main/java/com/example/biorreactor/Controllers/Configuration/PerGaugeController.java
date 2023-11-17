@@ -167,12 +167,54 @@ public class PerGaugeController implements Initializable {
             controlModeProperty.set(true);
             biorreactor.getLoops().get(pos).setControlMode(controlModeProperty.get());
             System.out.println(biorreactor.getLoops().get(pos).getName() + "Control mode: " + biorreactor.getLoops().get(pos).isControlMode());
+
+            if (on_btn.getStyleClass().contains("alt2_ToggleButton_container")) {
+                return;
+            }
+
+            if (on_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                on_btn.getStyleClass().remove("alt_ToggleButton_container");
+                on_btn.getStyleClass().add("alt2_ToggleButton_container");
+            } else {
+                on_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                on_btn.getStyleClass().add("alt_ToggleButton_container");
+            }
+
+            // Cambiar el estilo de off_btn
+            if (off_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                off_btn.getStyleClass().remove("alt_ToggleButton_container");
+                off_btn.getStyleClass().add("alt2_ToggleButton_container");
+            } else {
+                off_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                off_btn.getStyleClass().add("alt_ToggleButton_container");
+            }
         });
 
         off_btn.setOnAction(event -> {
             controlModeProperty.set(false);
             biorreactor.getLoops().get(pos).setControlMode(controlModeProperty.get());
             System.out.println(biorreactor.getLoops().get(pos).getName() + " Control mode: " + biorreactor.getLoops().get(pos).isControlMode());
+
+            if (off_btn.getStyleClass().contains("alt2_ToggleButton_container")) {
+                return;
+            }
+
+            if (off_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                off_btn.getStyleClass().remove("alt_ToggleButton_container");
+                off_btn.getStyleClass().add("alt2_ToggleButton_container");
+            } else {
+                off_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                off_btn.getStyleClass().add("alt_ToggleButton_container");
+            }
+
+            // Cambiar el estilo de on_btn
+            if (on_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                on_btn.getStyleClass().remove("alt_ToggleButton_container");
+                on_btn.getStyleClass().add("alt2_ToggleButton_container");
+            } else {
+                on_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                on_btn.getStyleClass().add("alt_ToggleButton_container");
+            }
         });
 
         alarmSettings_btn.setOnAction(event -> onAlarms(biorreactor.getLoops().get(pos)));

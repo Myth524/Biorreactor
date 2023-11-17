@@ -114,12 +114,54 @@
                 controlModeProperty1.set(true);
                 biorreactor.getPumps().get(0).setControlMode(controlModeProperty1.get());
                 System.out.println(biorreactor.getPumps().get(0).getName() + " Control mode: " + biorreactor.getPumps().get(0).isControlMode());
+
+                if (on_btn.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (on_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de off_btn
+                if (off_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             off_btn.setOnAction(event -> {
                 controlModeProperty1.set(false);
                 biorreactor.getPumps().get(0).setControlMode(controlModeProperty1.get());
                 System.out.println(biorreactor.getPumps().get(0).getName() + " Control mode: " + biorreactor.getPumps().get(0).isControlMode());
+
+                if (off_btn.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (off_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de on_btn
+                if (on_btn.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             periodValue1 = new SimpleIntegerProperty(biorreactor.getPumps().get(0).getPeriod().get());
@@ -195,12 +237,54 @@
                 controlModeProperty2.set(true);
                 biorreactor.getPumps().get(1).setControlMode(controlModeProperty2.get());
                 System.out.println(biorreactor.getPumps().get(1).getName() + " Control mode: " + biorreactor.getPumps().get(1).isControlMode());
+
+                if (on_btn2.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (on_btn2.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn2.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn2.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn2.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn2.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de off_btn
+                if (off_btn2.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn2.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn2.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn2.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn2.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             off_btn2.setOnAction(event -> {
                 controlModeProperty2.set(false);
                 biorreactor.getPumps().get(1).setControlMode(controlModeProperty2.get());
                 System.out.println(biorreactor.getPumps().get(1).getName() + " Control mode: " + biorreactor.getPumps().get(1).isControlMode());
+
+                if (off_btn2.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (off_btn2.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn2.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn2.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn2.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn2.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de on_btn
+                if (on_btn2.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn2.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn2.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn2.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn2.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             periodValue2 = new SimpleIntegerProperty(biorreactor.getPumps().get(1).getPeriod().get());
@@ -276,12 +360,54 @@
                 controlModeProperty3.set(true);
                 biorreactor.getPumps().get(2).setControlMode(controlModeProperty3.get());
                 System.out.println(biorreactor.getPumps().get(2).getName() + "Control mode: " + biorreactor.getPumps().get(2).isControlMode());
+
+                if (on_btn3.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (on_btn3.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn3.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn3.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn3.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn3.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de off_btn
+                if (off_btn3.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn3.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn3.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn3.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn3.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             off_btn3.setOnAction(event -> {
                 controlModeProperty3.set(false);
                 biorreactor.getPumps().get(2).setControlMode(controlModeProperty3.get());
                 System.out.println(biorreactor.getPumps().get(2).getName() + " Control mode: " + biorreactor.getPumps().get(2).isControlMode());
+
+                if (off_btn3.getStyleClass().contains("alt2_ToggleButton_container")) {
+                    return;
+                }
+
+                if (off_btn3.getStyleClass().contains("alt_ToggleButton_container")) {
+                    off_btn3.getStyleClass().remove("alt_ToggleButton_container");
+                    off_btn3.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    off_btn3.getStyleClass().remove("alt2_ToggleButton_container");
+                    off_btn3.getStyleClass().add("alt_ToggleButton_container");
+                }
+
+                // Cambiar el estilo de on_btn
+                if (on_btn3.getStyleClass().contains("alt_ToggleButton_container")) {
+                    on_btn3.getStyleClass().remove("alt_ToggleButton_container");
+                    on_btn3.getStyleClass().add("alt2_ToggleButton_container");
+                } else {
+                    on_btn3.getStyleClass().remove("alt2_ToggleButton_container");
+                    on_btn3.getStyleClass().add("alt_ToggleButton_container");
+                }
             });
 
             periodValue3 = new SimpleIntegerProperty(biorreactor.getPumps().get(2).getPeriod().get());

@@ -30,7 +30,7 @@
 .alt_ToggleButton_container {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #132A13;
-    -fx-pref-width: 70;
+    -fx-pref-width: 90;
     -fx-pref-height: 30;
     -fx-alignment: center;
     -fx-background-radius: 10;
@@ -54,7 +54,7 @@ alt_ToggleButton_container Button {
 .alt2_ToggleButton_container {
     -fx-background-color: #132A13;
     -fx-text-fill: #FFFFFF;
-    -fx-pref-width: 70;
+    -fx-pref-width: 90;
     -fx-pref-height: 30;
     -fx-alignment: center;
     -fx-background-radius: 10;
