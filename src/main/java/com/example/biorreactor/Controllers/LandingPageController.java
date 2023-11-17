@@ -20,6 +20,7 @@ public class LandingPageController implements Initializable {
 
     private void addListeners(){
         configuration_btn.setOnAction(event -> onConfiguration());
+        historic_btn.setOnAction(event -> onHistoric());
         quit_btn.setOnAction(event -> onQuit());
     }
 
@@ -28,6 +29,14 @@ public class LandingPageController implements Initializable {
         ViewModel.getInstance().getViewFactory().closeStage(stage);
         ViewModel.getInstance().getViewFactory().showConfigurationWindow();
     }
+
+    private void onHistoric(){
+        Stage stage = (Stage) historic_btn.getScene().getWindow();
+        ViewModel.getInstance().getViewFactory().closeStage(stage);
+        ViewModel.getInstance().getViewFactory().showHistoricView();
+
+    }
+
     private void onQuit(){
         Stage stage = (Stage) quit_btn.getScene().getWindow();
         ViewModel.getInstance().getViewFactory().closeStage(stage);

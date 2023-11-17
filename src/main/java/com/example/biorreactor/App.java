@@ -18,9 +18,9 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         ViewModel viewModel = ViewModel.getInstance();
-        viewModel.getViewFactory().showConfigurationWindow();
+        viewModel.getViewFactory().showLandingPageWindow();
         Biorreactor biorreactor = Biorreactor.getInstance();
-
+/*
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         executorService.scheduleAtFixedRate(() -> {
             changePvValues(biorreactor);
@@ -38,7 +38,7 @@ public class App extends Application {
         });
 
         alarmThread.setDaemon(true);
-        alarmThread.start();
+        alarmThread.start();*/
     }
 
     private void changePvValues(Biorreactor biorreactor) {

@@ -83,6 +83,28 @@ public class PersistenceHandler implements IPersistenceHandler {
         return data;
     }
 
+    public List<BiorreactorData> getAllBiorreactors() {
+        List<BiorreactorData> biorreactors = new ArrayList<>();
+        try {
+            String query = "SELECT biorreactor_id, cropName, date FROM Biorreactor";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("biorreactor_id");
+                    String name = resultSet.getString("cropName");
+                    java.sql.Date date = resultSet.getDate("date");
+
+                    BiorreactorData biorreactorData = new BiorreactorData(id, name, date);
+                    biorreactors.add(biorreactorData);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.err);
+        }
+        return biorreactors;
+    }
+
+
     public void insertLoop(int biorreactorId, String loopName, double setpoint, double processValue) {
         String insertLoopQuery = "INSERT INTO Loops (loopName, setpoint, processValue, FK_biorreactor_id, timestamp) VALUES (?, ?, ?, ?, NOW())";
         try {
@@ -109,8 +131,8 @@ public class PersistenceHandler implements IPersistenceHandler {
      -- Crear la tabla 'Biorreactor'
      CREATE TABLE Biorreactor (
      biorreactor_id SERIAL PRIMARY KEY,
-     nombre VARCHAR(255),
-     fecha_creacion DATE,
+     cropName VARCHAR(255),
+     date DATE,
      FK_user_id INT,
      FOREIGN KEY (FK_user_id) REFERENCES Users(user_id)
      );

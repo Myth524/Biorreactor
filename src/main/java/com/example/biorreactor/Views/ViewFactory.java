@@ -3,6 +3,7 @@ package com.example.biorreactor.Views;
 import com.example.biorreactor.Controllers.Configuration.AlarmSettingsController;
 import com.example.biorreactor.Controllers.Configuration.ConfigurationController;
 import com.example.biorreactor.Controllers.Configuration.PerGaugeController;
+import com.example.biorreactor.Controllers.Historic.HistoricController;
 import com.example.biorreactor.Models.Loop;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -135,6 +136,12 @@ public class ViewFactory {
         FXMLLoader loader  = new FXMLLoader(getClass().getResource("/Fxml/Configuration/Configuration.fxml"));
         ConfigurationController configurationController =  new ConfigurationController();
         loader.setController(configurationController);
+        createStage(loader);
+    }
+    public void showHistoricView(){
+        FXMLLoader loader  = new FXMLLoader(getClass().getResource("/Fxml/Historic/Historic.fxml"));
+        HistoricController historicController =  new HistoricController();
+        loader.setController(historicController);
         createStage(loader);
     }
     public void showPerGaugeWindow(Loop selectedLoop) {
