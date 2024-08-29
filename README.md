@@ -4,13 +4,17 @@ This thesis project involves the development of a software prototype for the con
 
 ## **Key Features:**
 **Graphical User Interface (GUI):** Designed using JavaFX and FXML, with Scene Builder used for layout creation and customization. CSS is applied to style the interface, ensuring an intuitive and visually appealing design.
+
 **Process Simulation:** The software allows users to simulate key operational parameters of a stirred tank bioreactor, such as:
 - Agitation speed
 - Temperature control
 - pH regulation
 - Nutrient supply
+
 **Real-time Monitoring:** Users can track the changes in the system in real-time, visualizing the effect of parameter adjustments on the bioreactor's performance.
+
 **Interactive Controls:** The interface includes interactive controls for users to input or adjust parameters and immediately see the impact on the system's operation.
+
 ## **Technologies Used**
 **JavaFX:** For building the graphical user interface and providing real-time interaction.
 **FXML:** For defining the structure of the interface.
