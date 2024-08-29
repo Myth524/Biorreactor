@@ -33,34 +33,28 @@ This project demonstrates the creation of a functional prototype for a stirred t
 ![image](https://github.com/user-attachments/assets/0d6e952d-01cd-4afa-b6bc-b1814c0108dc)
 
 ### Configuration:
-![image](https://github.com/user-attachments/assets/c6e4e903-0b15-4c76-ae98-02392c3226f4)
+![image](https://github.com/user-attachments/assets/d8668e77-175d-4d73-8e1e-f2c1d0ed678b)
 
 ### Summary:
-![image](https://github.com/user-attachments/assets/08dfe0bd-ca57-4d0c-a165-752eefb70fb7)
+![image](https://github.com/user-attachments/assets/afd38df5-09ce-4cde-abe0-8c0bcbad835d)
 
 ### Gague:
-![image](https://github.com/user-attachments/assets/8c6ed760-cbb1-405b-9de0-84c1e99e4e77)
+![image](https://github.com/user-attachments/assets/31ce2da5-7ec5-4533-a779-0933f0e8d8a9)
 
 ### Into Gauge:
-![image](https://github.com/user-attachments/assets/b48f00c8-81e5-43f3-b05d-03a3e57d8031)
+![image](https://github.com/user-attachments/assets/c8737a8e-8e2c-4e13-b1f0-f3899f542758)
 
 ### Into Alarm Settings:
-![image](https://github.com/user-attachments/assets/b4d78fd8-8655-46c5-a894-d6f2e84753dd)
+![image](https://github.com/user-attachments/assets/da4a7ffe-dc05-4d3a-b5ca-8fa9d21a22eb)
 
 ### Pumps:
-![image](https://github.com/user-attachments/assets/07a0f80a-eb2b-4b0e-a3d7-f460217bdb94)
+![image](https://github.com/user-attachments/assets/6c85f5ab-6353-4dfc-b1ba-58a26abb652c)
 
 ### Calibration 
-![image](https://github.com/user-attachments/assets/5671df6b-90df-497f-9e98-1033219e65a6)
+![image](https://github.com/user-attachments/assets/6fb61314-1d6d-4a74-b05f-dae39829f66d)
 
 ### Alarms:
-![image](https://github.com/user-attachments/assets/9109879b-38d5-4c66-bd06-77b8c8d9cd02)
+![image](https://github.com/user-attachments/assets/49aea12f-51be-4820-b1b7-ebaa757cf7d7)
 
 ### Graphs:
-
-
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/7f426eec-941d-4f6e-8eff-5eb3a785f7e2)
