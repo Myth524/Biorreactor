@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/08dfe0bd-ca57-4d0c-a165-752eefb70fb7)# Software Prototype for a Stirred Tank Bioreactor
+# Software Prototype for a Stirred Tank Bioreactor
 ## **Description**:
 This thesis project involves the development of a software prototype for the control and monitoring of a stirred tank bioreactor. The system is built using FXML, Java, CSS, and JavaFX with the aid of Scene Builder for the design of the graphical user interface (GUI). The software prototype aims to simulate and visualize key processes within a bioreactor, such as agitation speed, temperature, and pH control, providing a user-friendly interface for real-time monitoring and adjustments.
 
@@ -36,15 +36,15 @@ This project demonstrates the creation of a functional prototype for a stirred t
 ![image](https://github.com/user-attachments/assets/c6e4e903-0b15-4c76-ae98-02392c3226f4)
 
 ### Summary:
-![image](https://github.com/user-attachments/assets/51c9d0b2-78b9-4483-a1bd-03eb95bde3e1)
+![image](https://github.com/user-attachments/assets/08dfe0bd-ca57-4d0c-a165-752eefb70fb7)
 
 ### Gague:
 ![image](https://github.com/user-attachments/assets/8c6ed760-cbb1-405b-9de0-84c1e99e4e77)
 
-#### Into Gauge:
+### Into Gauge:
 ![image](https://github.com/user-attachments/assets/b48f00c8-81e5-43f3-b05d-03a3e57d8031)
 
-##### Into Alarm Settings:
+### Into Alarm Settings:
 ![image](https://github.com/user-attachments/assets/b4d78fd8-8655-46c5-a894-d6f2e84753dd)
 
 ### Pumps:
@@ -57,7 +57,6 @@ This project demonstrates the creation of a functional prototype for a stirred t
 ![image](https://github.com/user-attachments/assets/9109879b-38d5-4c66-bd06-77b8c8d9cd02)
 
 ### Graphs:
-![Uploading image.png…]()
 
 
 
