@@ -25,7 +25,7 @@ This thesis project involves the development of a software prototype for the con
 ## **Conclusion**
 This project demonstrates the creation of a functional prototype for a stirred tank bioreactor control system, providing a foundation for further development and real-world application in bioprocessing industries. The use of JavaFX and FXML ensures flexibility and scalability, while the intuitive GUI allows users to easily simulate and monitor the bioreactor’s performance in real time.
 
-## UI/UX
+## GUI
 ### Login:
 ![image](https://github.com/user-attachments/assets/5a5855ff-eca2-4e39-949c-33a5c6888037)
 
