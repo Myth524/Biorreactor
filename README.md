@@ -9,7 +9,7 @@ This thesis project involves the development of a software prototype for the con
 - Agitation speed
 - Temperature control
 - pH regulation
-- Nutrient supply
+- Stirring rate
 
 **Real-time Monitoring:** Users can track the changes in the system in real-time, visualizing the effect of parameter adjustments on the bioreactor's performance.
 
