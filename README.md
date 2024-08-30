@@ -16,10 +16,15 @@ This thesis project involves the development of a software prototype for the con
 **Interactive Controls:** The interface includes interactive controls for users to input or adjust parameters and immediately see the impact on the system's operation.
 
 ## **Technologies Used**
+
 **JavaFX:** For building the graphical user interface and providing real-time interaction.
+
 **FXML:** For defining the structure of the interface.
+
 **CSS:** Used for customizing the appearance of the software.
+
 **Java:** The core language used to implement the business logic and process control.
+
 **Scene Builder:** For visually designing the interface layout.
 
 ## **Conclusion**
